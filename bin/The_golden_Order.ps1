@@ -10,8 +10,8 @@ Versionsumschreibung: In der Testphase
 # ----
 # Gloable Variablen
 # ----
-$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
-$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\" # Verzeichnis indem die Files abgelegt werden
+$TopSrc = "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\topSrc" # Verzeichnis, vom dem ein Backup gemacht wird
+$TopBck = "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\topBck" # Verzeichnis indem die Files abgelegt werden
 $date = Get-Date -Format "dd.MM.yyyy HH:mm" # Akutelles Datum speichern
 $TotalBackupedFilles = 0 # Z�hler, wie viele Dateien insegesamt kopiert wurden
 
@@ -47,19 +47,18 @@ $BackupPath = $TopBck + "\*" # W�hlt alle Dateien im Backup-Pfad aus
 $TotalBackupedFilles = (Get-ChildItem -Recurse | Measure-Object).Count
 
 # Erstellt das Backup der jeweiligen Datein in TopBck //// Testversion
-Copy-Item -Path $BackupFilesSrc -Destination $TopBck -Force # Dateien kopieren
-
-Get-ChildItem -Recurse # �berpr�fen ob Objekt kopiert wird
-
-Write-Host "" # Zeilenumbruch
-Write-Host "Insgesamt wurden " $TotalBackupedFilles " Dateien kopiert" # Information, wie viele Dateien kopiert wurden
+  Get-ChildItem -Path $BackupFilesSrc -Recurse | ForEach-Object {
+    <#   $_.Name #>
+    Copy-Item  -Path $_ -Destination $TopBck
+  }
 
 # Erstellt das Backup der jeweiligen Datein in TopBck //// Finale Version
 function doBackup() {
-  Get-ChildItem -Path $BackupFilesSrc -Recurse | ForEach-Object {
-    <#   $_.Name #>
-    Copy-Item  -Path $_.Name -Destination $TopBck
-  }
+  # Komplett unbrauchbar
+  Copy-Item -Path $BackupFilesSrc -Destination $TopBck -Force # Dateien kopieren
+  Get-ChildItem -Recurse # �berpr�fen ob Objekt kopiert wird
+  Write-Host "" # Zeilenumbruch
+  Write-Host "Insgesamt wurden " $TotalBackupedFilles " Dateien kopiert" # Information, wie viele Dateien kopiert wurden
   
 }
 
