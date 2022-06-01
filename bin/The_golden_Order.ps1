@@ -1,6 +1,6 @@
 <#
 Projekt; Recovery of the elden
-Letzte Änderung: 01.06.2022 11:16
+Letzte ï¿½nderung: 01.06.2022 11:16
 Erstellt von: Dominic Tosku & Justin Urbanek
 Version: 0.5
 Versionsumschreibung: In der Testphase
@@ -13,50 +13,55 @@ Versionsumschreibung: In der Testphase
 $TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
 $TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\" # Verzeichnis indem die Files abgelegt werden
 $date = Get-Date -Format "dd.MM.yyyy HH:mm" # Akutelles Datum speichern
-$TotalBackupedFilles = 0 # Zähler, wie viele Dateien insegesamt kopiert wurden
+$TotalBackupedFilles = 0 # Zï¿½hler, wie viele Dateien insegesamt kopiert wurden
 
-# ----
+# ---------------------------------------------------------------------------------
 # regex scheisse
-# ----
+# ---------------------------------------------------------------------------------
 function lastChangeDate() {
-    Set-Location -path "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\bin"
-    $Location = Get-Location
-    $file = "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\bin\Jo.txt"
-    $regex = 'Letzte Änderung: [^"]*' # um die Letzte Änderung zu finden
-    # Der Begriff "Letze Änderung" wird mit dem akutellen Datum ersetzt
-    (Get-Content $file) -replace $regex, ('Letzte Änderung: ' + $date) | Set-Content $file
+  Set-Location -path "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\bin"
+  $Location = Get-Location
+  $file = "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\bin\Jo.txt"
+  $regex = 'Letzte ï¿½nderung: [^"]*' # um die Letzte ï¿½nderung zu finden
+  # Der Begriff "Letze ï¿½nderung" wird mit dem akutellen Datum ersetzt
+    (Get-Content $file) -replace $regex, ('Letzte ï¿½nderung: ' + $date) | Set-Content $file
 }
 
 
-# ----
+# ---------------------------------------------------------------------------------
 # Backup
-# ----
+# ---------------------------------------------------------------------------------
 
 # Logdatei erstellen
-function startLog() {
-    Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
-}
+
+Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
+
 
 
 # ----
 # Einfaches Kopieren
 $BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
-$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
+$BackupPath = $TopBck + "\*" # Wï¿½hlt alle Dateien im Backup-Pfad aus
 
 
 $TotalBackupedFilles = (Get-ChildItem -Recurse | Measure-Object).Count
 
-Get-ChildItem -Path $BackupFilesSrc -Recurse | ForEach-Object {
-  $_.Name
-  # Copy-Item  -Path $_.Name -Destination $TopBck
-}
+# Erstellt das Backup der jeweiligen Datein in TopBck //// Testversion
+Copy-Item -Path $BackupFilesSrc -Destination $TopBck -Force # Dateien kopieren
 
-# Copy-Item -Path $BackupFilesSrc -Destination $TopBck -Force # Dateien kopieren
-
-# Get-ChildItem -Recurse # überprüfen ob Objekt kopiert wird
+Get-ChildItem -Recurse # ï¿½berprï¿½fen ob Objekt kopiert wird
 
 Write-Host "" # Zeilenumbruch
 Write-Host "Insgesamt wurden " $TotalBackupedFilles " Dateien kopiert" # Information, wie viele Dateien kopiert wurden
+
+# Erstellt das Backup der jeweiligen Datein in TopBck //// Finale Version
+function doBackup() {
+  Get-ChildItem -Path $BackupFilesSrc -Recurse | ForEach-Object {
+    <#   $_.Name #>
+    Copy-Item  -Path $_.Name -Destination $TopBck
+  }
+  
+}
 
 Stop-Transcript # Log file abschliessen
 
@@ -67,7 +72,7 @@ function cl {
 
 function CreateLog {
     
-  # Add-Content <File> -Value <LogText> # (Log-)Datei etwas anfügen
+  # Add-Content <File> -Value <LogText> # (Log-)Datei etwas anfï¿½gen
 }
 
 function CreateBackup {
