@@ -1,6 +1,6 @@
 <#
 Projekt; Recovery of the elden
-Letzte Änderung: 02.06.2022 09:21
+Letzte Änderung: 02.06.2022 11:34
 Erstellt von: Dominic Tosku & Justin Urbanek
 Version: 0.5
 Versionsumschreibung: In der Testphase
@@ -34,9 +34,10 @@ $BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 $TotalBackupedFilles = (Get-ChildItem -Recurse | Measure-Object).Count
 
 # ! Erstellt das Backup der jeweiligen Datein in TopBck //// Testversion
-Get-ChildItem -Path $BackupFilesSrc -Recurse | ForEach-Object {
+Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
   <#   $_.Name #>
-  Copy-Item  -Path $_ -Destination $TopBck
+  Write-Host $_.Name
+  Copy-Item  -Path $_ -Destination $TopBck -Force -Recurse
 }
 
 # ----
@@ -71,7 +72,6 @@ function lastChangeDate() {
   $pattern.Replace($txtFileContent, 'Letzte Änderung: ' + $date, 1) | Set-Content $file
 }
 
-lastChangeDate
 
 # * Säubert die Konsole
 function cl {
@@ -82,4 +82,3 @@ function cl {
 function CreateLog {
   # Add-Content <File> -Value <LogText> # (Log-)Datei etwas anf�gen
 }
-
