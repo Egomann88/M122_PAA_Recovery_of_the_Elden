@@ -10,8 +10,8 @@ Versionsumschreibung: In der Testphase
 # ----
 # Gloable Variablen
 # ----
-$TopSrc = "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\topSrc" # Verzeichnis, vom dem ein Backup gemacht wird
-$TopBck = "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\topBck" # Verzeichnis indem die Files abgelegt werden
+$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc" # Verzeichnis, vom dem ein Backup gemacht wird
+$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck" # Verzeichnis indem die Files abgelegt werden
 $date = Get-Date -Format "dd.MM.yyyy HH:mm" # Akutelles Datum speichern
 $TotalBackupedFilles = 0 # Z�hler, wie viele Dateien insegesamt kopiert wurden
 
@@ -20,7 +20,7 @@ $TotalBackupedFilles = 0 # Z�hler, wie viele Dateien insegesamt kopiert wurden
 # ---------------------------------------------------------------------------------
 
 # Logdatei erstellen
-# todo: Sollte ersetzt werden da zu viel im Log steht
+# todo: Sollte ersetzt werden, da zu viel im Log steht
 Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
 
 # ----
@@ -58,8 +58,8 @@ Stop-Transcript # Log file abschliessen
 # ---------------------------------------------------------------------------------
 
 # ----
-# * regex scheisse. Letztes Änderungsdatum wird überschrieben in diesen Powershell Skript
-# ! Zerstört die Source File momentan, mit vorsicht geniessen
+# * regex :( . Letztes Änderungsdatum wird überschrieben in diesen Powershell Skript
+# ! Kann die Source File zerstören, mit vorsicht geniessen
 # ----
 function lastChangeDate() {
   Set-Location -path "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\bin"
