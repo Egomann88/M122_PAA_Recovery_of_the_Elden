@@ -1,6 +1,6 @@
 <#
 Projekt; Recovery of the elden
-Letzte �nderung: 01.06.2022 11:16
+Letzte Änderung: 01.06.2022 11:16
 Erstellt von: Dominic Tosku & Justin Urbanek
 Version: 0.5
 Versionsumschreibung: In der Testphase
@@ -13,7 +13,7 @@ Versionsumschreibung: In der Testphase
 $TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc" # Verzeichnis, vom dem ein Backup gemacht wird
 $TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck" # Verzeichnis indem die Files abgelegt werden
 $date = Get-Date -Format "dd.MM.yyyy HH:mm" # Akutelles Datum speichern
-$TotalBackupedFilles = 0 # Z�hler, wie viele Dateien insegesamt kopiert wurden
+$TotalBackupedFilles = 0 # Zähler, wie viele Dateien insegesamt kopiert wurden
 
 # ---------------------------------------------------------------------------------
 # * Backup Funktionen
@@ -27,7 +27,7 @@ Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
 # Einfaches Kopieren
 # ? Könnte anders gelöst werden
 $BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
-$BackupPath = $TopBck + "\*" # W�hlt alle Dateien im Backup-Pfad aus
+$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
 # Zählt alle Dateien im Backup Ordner
 # * Zeigt an ob alle Dateien erfolgreich Kopiert wurden
@@ -45,7 +45,7 @@ Get-ChildItem -Path $BackupFilesSrc -Recurse | ForEach-Object {
 function CreateBackup() {
   # ? Komplett unbrauchbar
   Copy-Item -Path $BackupFilesSrc -Destination $TopBck -Force # Dateien kopieren
-  Get-ChildItem -Recurse # �berpr�fen ob Objekt kopiert wird
+  Get-ChildItem -Recurse # Überprüfen ob Objekt kopiert wird
   Write-Host "" # Zeilenumbruch
   Write-Host "Insgesamt wurden " $TotalBackupedFilles " Dateien kopiert" # Information, wie viele Dateien kopiert wurden
   
@@ -62,13 +62,16 @@ Stop-Transcript # Log file abschliessen
 # ! Kann die Source File zerstören, mit vorsicht geniessen
 # ----
 function lastChangeDate() {
-  Set-Location -path "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\bin"
+  Set-Location -path "C:\M122_PAA_Recovery_of_the_Elden\bin"
   $Location = Get-Location
-  $file = "C:\Users\KIM\Documents\Beruffsschule\Pap Partnerarbeit\M122_PAA_Recovery_of_the_Elden\bin\Jo.txt"
-  $regex = 'Letzte �nderung: [^"]*' # um die Letzte �nderung zu finden
-  # Der Begriff "Letze �nderung" wird mit dem akutellen Datum ersetzt
-    (Get-Content $file) -replace $regex, ('Letzte �nderung: ' + $date) | Set-Content $file
+  $file = "C:\M122_PAA_Recovery_of_the_Elden\bin\destroy.ps1"
+  $txtFileContent = (Get-Content $file -raw);
+  [regex]$pattern = 'Letzte Änderung: \d\d.\d\d.\d\d\d\d \d\d:\d\d'; # um die Letzte Änderung zu finden
+  # Der Begriff "Letze Änderung" wird mit dem akutellen Datum ersetzt
+  $pattern.Replace($txtFileContent, 'Letzte Änderung: ' + $date, 1) | Set-Content $file
 }
+
+lastChangeDate
 
 # * Säubert die Konsole
 function cl {
