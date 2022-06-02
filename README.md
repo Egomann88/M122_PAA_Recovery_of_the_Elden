@@ -1,6 +1,9 @@
 # M122_PAA_Recovery_of_the_Elden
 PAA - Recovery of the Elden 
 
+# How to Push:
+- [File] [Changes] [added / deleted / ...]
+
 # Auftrag:
 - Backup 
 - Log
