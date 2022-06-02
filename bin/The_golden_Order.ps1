@@ -1,6 +1,6 @@
 <#
 Projekt; Recovery of the elden
-Letzte Änderung: 01.06.2022 11:16
+Letzte Änderung: 02.06.2022 09:21
 Erstellt von: Dominic Tosku & Justin Urbanek
 Version: 0.5
 Versionsumschreibung: In der Testphase
@@ -64,7 +64,7 @@ Stop-Transcript # Log file abschliessen
 function lastChangeDate() {
   Set-Location -path "C:\M122_PAA_Recovery_of_the_Elden\bin"
   $Location = Get-Location
-  $file = "C:\M122_PAA_Recovery_of_the_Elden\bin\destroy.ps1"
+  $file = "C:\M122_PAA_Recovery_of_the_Elden\bin\The_golden_Order.ps1"
   $txtFileContent = (Get-Content $file -raw);
   [regex]$pattern = 'Letzte Änderung: \d\d.\d\d.\d\d\d\d \d\d:\d\d'; # um die Letzte Änderung zu finden
   # Der Begriff "Letze Änderung" wird mit dem akutellen Datum ersetzt
@@ -82,3 +82,4 @@ function cl {
 function CreateLog {
   # Add-Content <File> -Value <LogText> # (Log-)Datei etwas anf�gen
 }
+
