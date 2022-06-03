@@ -43,7 +43,7 @@ function CreateBackup {
     }
   }
 
-  $result = controllBackup PathSrc PathBck # Ruft funktion zur Überprüfung auf und speichert Rückgabewert
+  $result = controllBackup $PathSrc $PathBck # Ruft funktion zur Überprüfung auf und speichert Rückgabewert
   Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black #Gibt Resultat in Grün oder Rot an
 }
 
