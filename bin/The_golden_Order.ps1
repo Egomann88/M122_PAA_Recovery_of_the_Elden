@@ -56,13 +56,28 @@ function controllBackup([string]$checkSrc, [string]$checkBck) {
 
   Write-Host "" # Zeilenumbruch
   Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
-  if ($TotalSrcFiles -eq $TotalBckFiles) {
+  
+  [boolean]$Korrekt = checkHash $checkSrc $checkBck
+  if ($Korrekt) {
     # Alle Elemente wurden kopiert
     return ("Das Backup war Erfolgreich", "Green") #Gibt String mit Farbe zurück
   }
   else {
     # Nicht alle Elemente wurden kopiert
     return ("Das Backup ist Fehlgeschlagen", "Red") #Gibt String mit Farbe zurück
+  }
+}
+
+function checkHash ([string]$Hash1, [string]$Hash2) {
+  [string]$SrcHash = (Get-ChildItem –Path $Hash1 -Recurse | Where-Object { !($_.PSIsContainer) }) |
+  ForEach-Object { (Get-FileHash –Path $_.FullName -a md5).Hash};
+  [string]$BackHash = (Get-ChildItem –Path $Hash2 -Recurse | Where-Object { !($_.PSIsContainer) }) |
+  ForEach-Object { (Get-FileHash –Path $_.FullName -a md5).Hash};
+  if ($SrcHash -eq $BackHash) {
+    return "True"
+  }
+  else {
+    return "False"
   }
 }
 
