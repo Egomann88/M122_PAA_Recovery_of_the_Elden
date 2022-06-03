@@ -9,11 +9,11 @@ Versionsumschreibung: In der Testphase
 # ----
 # Gloable Variablen
 # ----
-$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
-$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\" # Verzeichnis indem die Files abgelegt werden
+[string]$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
+[string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\" # Verzeichnis indem die Files abgelegt werden
 $date = Get-Date -Format "dd.MM.yyyy HH:mm:ss" # Akutelles Datum speichern
-$BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
-$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
+[string]$BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
+# [string]$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
 # ----
 # Wilkommensnachricht
@@ -28,7 +28,7 @@ Write-host "Das Backup wird gestartet" -ForegroundColor Black -BackgroundColor w
 function CreateBackup() {
   # Holt alle Elemnte im Src Verzeichnis
   Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
-    $targetFile = $TopBck + $_.FullName.SubString($TopSrc.Length); # Pfad mit den Überordnern
+    [string]$targetFile = $TopBck + $_.FullName.SubString($TopSrc.Length); # Pfad mit den Überordnern
     # Überprüft, ob das akutelle Element ein Ordner ist
     if ($_.PSIsContainer) {
       New-Item -Path ($targetFile) -ItemType "directory" -Force # Neuen Ordner erstellen
@@ -43,8 +43,8 @@ function CreateBackup() {
 # ACHTUNG: Kann die Source File zerstören
 function lastChangeDate() {
   Set-Location -path "C:\M122_PAA_Recovery_of_the_Elden\bin"
-  $Location = Get-Location
-  $file = "C:\M122_PAA_Recovery_of_the_Elden\bin\The_golden_Order.ps1" # die zu bearbeitende Datei 
+  # $Location = Get-Location
+  [string]$file = "C:\M122_PAA_Recovery_of_the_Elden\bin\The_golden_Order.ps1" # die zu bearbeitende Datei 
   $txtFileContent = (Get-Content $file -raw); # Inhalt der Datei abspeichern
   [regex]$pattern = 'Letzte Änderung: \d\d.\d\d.\d\d\d\d \d\d:\d\d'; # sucht den Beriff "Letze Änderung"
   # Der Begriff "Letze Änderung" wird mit dem akutellen Datum ersetzt
@@ -73,9 +73,9 @@ CreateBackup # CreateBackup Funktion aufrufen
 
 
 # Zähler, wie viele Elemente kopiert werden sollen
-$TotalSrcFiles = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+[int]$TotalSrcFiles = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
 # Zähler, wie viele Elemnte kopiert wurden
-$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+[int]$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
 
 Write-Host "" # Zeilenumbruch
 Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
