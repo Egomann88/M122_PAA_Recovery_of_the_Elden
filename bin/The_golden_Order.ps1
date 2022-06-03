@@ -114,7 +114,7 @@ function lastChangeDate() {
 # -------------------------------------------------------------
 
 # Logdatei erstellen
-Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
+Start-Transcript "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt"
 CreateBackup # CreateBackup Funktion aufrufen
 Stop-Transcript  #Log file abschliessen
 
