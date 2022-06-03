@@ -9,9 +9,9 @@ Versionsumschreibung: In der Testphase
 # ----
 # Gloable Variablen
 # ----
+$date = Get-Date -Format "dd.MM.yyyy HH-mm-ss" # Akutelles Datum speichern
 [string]$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
-[string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\" # Verzeichnis indem die Files abgelegt werden
-$date = Get-Date -Format "dd.MM.yyyy HH:mm:ss" # Akutelles Datum speichern
+[string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\Backup $date\" # Verzeichnis indem die Files abgelegt werden
 [string]$BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
 # [string]$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
