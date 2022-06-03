@@ -23,8 +23,7 @@ Write-host $whatisit -ForegroundColor red -BackgroundColor white
 # ----
 $TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
 $TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\" # Verzeichnis indem die Files abgelegt werden
-$date = Get-Date -Format "dd.MM.yyyy HH:mm" # Akutelles Datum speichern
-$TotalBackupedFilles = 0 # Zähler, wie viele Dateien insegesamt kopiert wurden
+$date = Get-Date -Format "dd.MM.yyyy HH:mm:ss" # Akutelles Datum speichern
 
 # ---------------------------------------------------------------------------------
 # * Backup Funktionen
