@@ -25,17 +25,44 @@ Write-host "Das Backup wird gestartet" -ForegroundColor Black -BackgroundColor w
 # ----
 
 # Kopiert Elemente von Src und fügt diese in Bck ein
-function CreateBackup() {
+function CreateBackup {
+  Param(
+    [string]$PathSrc = $TopSrc,
+    [string]$PathBck = $TopBck
+  )
   # Holt alle Elemnte im Src Verzeichnis
   Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
-    [string]$targetFile = $TopBck + $_.FullName.SubString($TopSrc.Length); # Pfad mit den Überordnern
+    [string]$targetFile = $PathBck + $_.FullName.SubString($PathSrc.Length); # Sorgt dafür das im Pfad die Überodner sind
     # Überprüft, ob das akutelle Element ein Ordner ist
     if ($_.PSIsContainer) {
       New-Item -Path ($targetFile) -ItemType "directory" -Force # Neuen Ordner erstellen
     }
+    # Element ist ein File
     else {
       Copy-Item  -Path ($_.Fullname) -Destination ($targetFile) -Force -Container # kopiert Element, ins Bck Verzeichnis  
     }
+  }
+
+  $result = controllBackup PathSrc PathBck # Ruft funktion zur Überprüfung auf und speichert Rückgabewert
+  Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black #Gibt Resultat in Grün oder Rot an
+}
+
+# Überprüft ob das Backup erfolgreich ausgeführt wurde
+function controllBackup([string]$checkSrc, [string]$checkBck) {
+  # Zähler, wie viele Elemente kopiert werden sollen
+  [int]$TotalSrcFiles = (Get-ChildItem $checkSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+  # Zähler, wie viele Elemnte kopiert wurden
+  [int]$TotalBckFiles = (Get-ChildItem $checkBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+
+  Write-Host "" # Zeilenumbruch
+  Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
+  if ($TotalSrcFiles -eq $TotalBckFiles) {
+    # Alle Elemente wurden kopiert
+    return ("Das Backup war Erfolgreich", "Green") #Gibt String mit Farbe zurück
+  }
+  else {
+    # Nicht alle Elemente wurden kopiert
+    return ("Das Backup ist Fehlgeschlagen", "Red") #Gibt String mit Farbe zurück
   }
 }
 
@@ -70,24 +97,6 @@ function CreateLog {
 # Logdatei erstellen
 Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
 CreateBackup # CreateBackup Funktion aufrufen
-
-
-# Zähler, wie viele Elemente kopiert werden sollen
-[int]$TotalSrcFiles = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
-# Zähler, wie viele Elemnte kopiert wurden
-[int]$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
-
-Write-Host "" # Zeilenumbruch
-Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
-if ($TotalSrcFiles -eq $TotalBckFiles) {
-  # Alle Elemente wurden kopiert
-  Write-Host "Das Backup war Erfolgreich" -BackgroundColor Green -ForegroundColor Black
-}
-else {
-  # Nicht alle Elemente wurden kopiert
-  Write-Host "Das Backup ist Fehlgeschlagen" -BackgroundColor Red -ForegroundColor Black
-}
-
 Stop-Transcript  #Log file abschliessen
 
 Write-Host "Das Programm endet hier" -BackgroundColor White -ForegroundColor Black
