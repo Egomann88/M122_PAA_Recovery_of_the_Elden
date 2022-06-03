@@ -17,14 +17,14 @@ else {
   $whatisit = $Sad;
 }
 
-Write-host $whatisit -ForegroundColor red -BackgroundColor white
+Write-host $whatisit -ForegroundColor Black -BackgroundColor white
+
 # ----
 # Gloable Variablen
 # ----
 $TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
 $TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\" # Verzeichnis indem die Files abgelegt werden
-$date = Get-Date -Format "dd.MM.yyyy HH:mm" # Akutelles Datum speichern
-$TotalBackupedFilles = 0 # Zähler, wie viele Dateien insegesamt kopiert wurden
+$date = Get-Date -Format "dd.MM.yyyy HH:mm:ss" # Akutelles Datum speichern
 
 # ---------------------------------------------------------------------------------
 # * Backup Funktionen
@@ -40,9 +40,10 @@ $TotalBackupedFilles = 0 # Zähler, wie viele Dateien insegesamt kopiert wurden
 $BackupFilesSrc = $TopSrc # Objekt(e), das / die kopiert werden soll
 $BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
-# Zählt alle Dateien im Backup Ordner
+# Zähler, wie viele Dateien kopiert werden sollen
 # * Zeigt an ob alle Dateien erfolgreich Kopiert wurden
-$TotalBackupedFilles = (Get-ChildItem -Recurse | Measure-Object).Count
+$TotalSrcFiles = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
 
 # ! Erstellt das Backup der jeweiligen Datein in TopBck //// Testversion
 Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
@@ -62,6 +63,21 @@ Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
   Copy-Item  -Path $shitshit -Destination $TopBck -Force -Recurse
 } #>
 
+# nach dem Bck prüfen, ob alle Files kopiert wurden
+$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+Write-Host "" # Zeilenumbruch
+Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
+if ($TotalSrcFiles -ne $TotalBckFiles) {
+  Write-Host "Das Backup ist Fehlgeschlagen" -BackgroundColor Red -ForegroundColor Black
+}
+else {
+  Write-Host "Das Backup war Erfolgreich" -BackgroundColor Green -ForegroundColor Black
+}
+
+# Stop-Transcript  Log file abschliessen
+
+
+
 # ----
 # * Erstellt das Backup der jeweiligen Datein in TopBck //// Finale Version
 # ----
@@ -69,12 +85,8 @@ function CreateBackup() {
   # ? Komplett unbrauchbar
   Copy-Item -Path $BackupFilesSrc -Destination $TopBck -Force # Dateien kopieren
   Get-ChildItem -Recurse # Überprüfen ob Objekt kopiert wird
-  Write-Host "" # Zeilenumbruch
-  Write-Host "Insgesamt wurden " $TotalBackupedFilles " Dateien kopiert" # Information, wie viele Dateien kopiert wurden
   
 }
-
-# Stop-Transcript  Log file abschliessen
 
 # ---------------------------------------------------------------------------------
 # * Sekundäre Funktionen
