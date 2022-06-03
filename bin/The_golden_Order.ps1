@@ -6,29 +6,29 @@ Version: 0.5
 Versionsumschreibung: In der Testphase
 #>
 
-# ----
+# -------------------------------------------------------------
 # Gloable Variablen
-# ----
+# -------------------------------------------------------------
 $date = Get-Date -Format "dd.MM.yyyy HH-mm-ss" # Akutelles Datum speichern
 [string]$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
 [string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\Backup $date\" # Verzeichnis indem die Files abgelegt werden
 [string]$BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
 # [string]$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
-# ----
+# -------------------------------------------------------------
 # Wilkommensnachricht
-# ----
+# -------------------------------------------------------------
 Write-host "Das Backup wird gestartet" -ForegroundColor Black -BackgroundColor white
 
-# ----
+# -------------------------------------------------------------
 # Funktionen
-# ----
+# -------------------------------------------------------------
 
 # Kopiert Elemente von Src und fügt diese in Bck ein
 function CreateBackup {
   Param(
-    [string]$PathSrc = $TopSrc,
-    [string]$PathBck = $TopBck
+    [string]$PathSrc = $TopSrc, # Pfad aus dem ein Backup erstellt werden soll / Default TopSrc
+    [string]$PathBck = $TopBck # Pfad in welchem das Backup erstellt werden soll / Default TopBck
   )
   # Holt alle Elemnte im Src Verzeichnis
   Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
@@ -47,7 +47,7 @@ function CreateBackup {
   Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black #Gibt Resultat in Grün oder Rot an
 }
 
-# Überprüft ob das Backup erfolgreich ausgeführt wurde
+# Zählt alle kopierten Objekte und ruft Funktion zum kontrollieren auf
 function controllBackup([string]$checkSrc, [string]$checkBck) {
   # Zähler, wie viele Elemente kopiert werden sollen
   [int]$TotalSrcFiles = (Get-ChildItem $checkSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
@@ -57,7 +57,7 @@ function controllBackup([string]$checkSrc, [string]$checkBck) {
   Write-Host "" # Zeilenumbruch
   Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
   
-  [boolean]$Korrekt = checkHash $checkSrc $checkBck
+  [boolean]$Korrekt = checkHash $checkSrc $checkBck # Ruft Funktion zum Hash check auf und speichert Ausgabe
   if ($Korrekt) {
     # Alle Elemente wurden kopiert
     return ("Das Backup war Erfolgreich", "Green") #Gibt String mit Farbe zurück
@@ -67,18 +67,34 @@ function controllBackup([string]$checkSrc, [string]$checkBck) {
     return ("Das Backup ist Fehlgeschlagen", "Red") #Gibt String mit Farbe zurück
   }
 }
-
+# !highlight meines Lebens –Path
+# Kontrolliert den Hash des Source und Backup Ordners
 function checkHash ([string]$Hash1, [string]$Hash2) {
-  [string]$SrcHash = (Get-ChildItem –Path $Hash1 -Recurse | Where-Object { !($_.PSIsContainer) }) |
-  ForEach-Object { (Get-FileHash –Path $_.FullName -a md5).Hash};
-  [string]$BackHash = (Get-ChildItem –Path $Hash2 -Recurse | Where-Object { !($_.PSIsContainer) }) |
-  ForEach-Object { (Get-FileHash –Path $_.FullName -a md5).Hash};
+  # Weisst den Hash aller Files im Source Ordner einer Variablen zu
+  [string]$SrcHash = (Get-ChildItem -Path $Hash1 -Recurse | Where-Object { !($_.PSIsContainer) }) |
+  ForEach-Object { (Get-FileHash -Path $_.FullName -a md5).Hash };
+   # Weisst den Hash aller Files im Backup Ordner einer Variablen zu
+  [string]$BackHash = (Get-ChildItem -Path $Hash2 -Recurse | Where-Object { !($_.PSIsContainer) }) |
+  ForEach-Object { (Get-FileHash -Path $_.FullName -a md5).Hash };
+  # Stimmt der Hash des Source und Backup Ordner überei?
   if ($SrcHash -eq $BackHash) {
-    return "True"
+    return 1 # Backup ist erfolgreich ausgeführt worden
   }
   else {
-    return "False"
+    return 0 # Backup ist fehlgeschlagen
   }
+}
+
+# Erstellt eine Log File
+# Informationen über alle Kopierten Dateien
+function CreateLog {
+  # Add-Content <File> -Value <LogText> # (Log-)Datei etwas anf�gen
+}
+
+# Shortcut für Clear-Host
+# Cleart die Konsole
+function cl {
+  Clear-Host
 }
 
 # Letztes Änderungsdatum in diesen Powershell-Skript wird überschrieben 
@@ -93,21 +109,9 @@ function lastChangeDate() {
   $pattern.Replace($txtFileContent, 'Letzte Änderung: ' + $date, 1) | Set-Content $file
 }
 
-# Shortcut für Clear-Host
-# Cleart die Konsole
-function cl {
-  Clear-Host
-}
-
-# Erstellt eine Log File
-# Informationen über alle Kopierten Dateien
-function CreateLog {
-  # Add-Content <File> -Value <LogText> # (Log-)Datei etwas anf�gen
-}
-
-# ----
+# -------------------------------------------------------------
 # Hauptcode
-# ----
+# -------------------------------------------------------------
 
 # Logdatei erstellen
 Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
