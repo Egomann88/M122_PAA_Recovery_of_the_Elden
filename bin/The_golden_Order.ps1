@@ -7,11 +7,22 @@ Versionsumschreibung: In der Testphase
 #>
 
 
+$Happy = "Dieses Program wird funktionieren";
+$Sad = "Dieses Program wird nicht funktionieren";
+$whatisit = ""
+if ((Get-Random -Minimum 0 -Maximum 3) -eq 1) {
+  $whatisit = $Happy;
+}
+else {
+  $whatisit = $Sad;
+}
+
+Write-host $whatisit -ForegroundColor red -BackgroundColor white
 # ----
 # Gloable Variablen
 # ----
-$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc" # Verzeichnis, vom dem ein Backup gemacht wird
-$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck" # Verzeichnis indem die Files abgelegt werden
+$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
+$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\" # Verzeichnis indem die Files abgelegt werden
 $date = Get-Date -Format "dd.MM.yyyy HH:mm" # Akutelles Datum speichern
 $TotalBackupedFilles = 0 # Zähler, wie viele Dateien insegesamt kopiert wurden
 
@@ -21,7 +32,7 @@ $TotalBackupedFilles = 0 # Zähler, wie viele Dateien insegesamt kopiert wurden
 
 # Logdatei erstellen
 # todo: Sollte ersetzt werden, da zu viel im Log steht
-Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
+# Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
 
 # ----
 # Einfaches Kopieren
@@ -35,10 +46,21 @@ $TotalBackupedFilles = (Get-ChildItem -Recurse | Measure-Object).Count
 
 # ! Erstellt das Backup der jeweiligen Datein in TopBck //// Testversion
 Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
-  <#   $_.Name #>
-  Write-Host $_.Name
-  Copy-Item  -Path $_ -Destination $TopBck -Force -Recurse
+
+  if ($_.PSIsContainer) {
+    New-Item -Path ($TopBck + $_.Name) -ItemType "directory"
+    <#  Copy-Item  -Path ($TopSrc + $_) -Recurse -Destination ($TopBck + $_) -Force  #>
+  }
+  else {
+    Copy-Item  -Path ($_.Fullname) -Destination ($TopBck + $_.Parent + '\' + $_) -Force
+  }
 }
+
+<# for ($shit = 0; $shit -lt 2; $shit++) {
+
+  $shitshit = Get-ChildItem -Path $BackupFilesSrc 
+  Copy-Item  -Path $shitshit -Destination $TopBck -Force -Recurse
+} #>
 
 # ----
 # * Erstellt das Backup der jeweiligen Datein in TopBck //// Finale Version
@@ -52,7 +74,7 @@ function CreateBackup() {
   
 }
 
-Stop-Transcript # Log file abschliessen
+# Stop-Transcript  Log file abschliessen
 
 # ---------------------------------------------------------------------------------
 # * Sekundäre Funktionen
