@@ -5,7 +5,7 @@ Erstellt von: Dominic Tosku & Justin Urbanek
 Version: 0.5
 Versionsumschreibung: In der Testphase
 #>
- Write-host $whatisit -ForegroundColor Black -BackgroundColor white
+
 # ----
 # Gloable Variablen
 # ----
@@ -15,82 +15,79 @@ $date = Get-Date -Format "dd.MM.yyyy HH:mm:ss" # Akutelles Datum speichern
 $BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
 $BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
-# ---------------------------------------------------------------------------------
-# * Backup Funktionen
-# ---------------------------------------------------------------------------------
+# ----
+# Wilkommensnachricht
+# ----
+Write-host "Das Backup wird gestartet" -ForegroundColor Black -BackgroundColor white
+
+# ----
+# Funktionen
+# ----
+
+# Kopiert Elemente von Src und fügt diese in Bck ein
 function CreateBackup() {
+  # Holt alle Elemnte im Src Verzeichnis
   Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
-    $targetFile = $TopBck + $_.FullName.SubString($TopSrc.Length);
+    $targetFile = $TopBck + $_.FullName.SubString($TopSrc.Length); # Pfad mit den Überordnern
+    # Überprüft, ob das akutelle Element ein Ordner ist
     if ($_.PSIsContainer) {
-      New-Item -Path ($targetFile) -ItemType "directory" -Force
-      <# Copy-Item  -Path ($TopSrc + $_) -Recurse -Destination ($TopBck + $_) -Force #> # ! Leftover Code
+      New-Item -Path ($targetFile) -ItemType "directory" -Force # Neuen Ordner erstellen
     }
     else {
-      Copy-Item  -Path ($_.Fullname) -Destination ($targetFile ) -Force -Container
+      Copy-Item  -Path ($_.Fullname) -Destination ($targetFile) -Force -Container # kopiert Element, ins Bck Verzeichnis  
     }
   }
 }
-# ---------------------------------------------------------------------------------
-# * Sekundäre Funktionen
-# ---------------------------------------------------------------------------------
 
-# ----
-# * regex :( . Letztes Änderungsdatum wird überschrieben in diesen Powershell Skript
-# ! Kann die Source File zerstören, mit vorsicht geniessen
-# ----
+# Letztes Änderungsdatum in diesen Powershell-Skript wird überschrieben 
+# ACHTUNG: Kann die Source File zerstören
 function lastChangeDate() {
   Set-Location -path "C:\M122_PAA_Recovery_of_the_Elden\bin"
   $Location = Get-Location
-  $file = "C:\M122_PAA_Recovery_of_the_Elden\bin\The_golden_Order.ps1"
-  $txtFileContent = (Get-Content $file -raw);
-  [regex]$pattern = 'Letzte Änderung: \d\d.\d\d.\d\d\d\d \d\d:\d\d'; # um die Letzte Änderung zu finden
+  $file = "C:\M122_PAA_Recovery_of_the_Elden\bin\The_golden_Order.ps1" # die zu bearbeitende Datei 
+  $txtFileContent = (Get-Content $file -raw); # Inhalt der Datei abspeichern
+  [regex]$pattern = 'Letzte Änderung: \d\d.\d\d.\d\d\d\d \d\d:\d\d'; # sucht den Beriff "Letze Änderung"
   # Der Begriff "Letze Änderung" wird mit dem akutellen Datum ersetzt
   $pattern.Replace($txtFileContent, 'Letzte Änderung: ' + $date, 1) | Set-Content $file
 }
 
-# * Säubert die Konsole
+# Shortcut für Clear-Host
+# Cleart die Konsole
 function cl {
   Clear-Host
 }
-# * Erstellt ein Log File und zeigt die kopierten Dateien
-# * Zeigt Status des erfolgreichen Abschliessens an
+
+# Erstellt eine Log File
+# Informationen über alle Kopierten Dateien
 function CreateLog {
   # Add-Content <File> -Value <LogText> # (Log-)Datei etwas anf�gen
 }
 
-function deleteThis {
-  $Happy = "Dieses Program wird funktionieren";
-  $Sad = "Dieses Program wird nicht funktionieren";
-  $whatisit = ""
-  if ((Get-Random -Minimum 0 -Maximum 3) -eq 1) {
-    $whatisit = $Happy;
-  }
-  else {
-    $whatisit = $Sad;
-  }
-}
+# ----
+# Hauptcode
+# ----
 
 # Logdatei erstellen
 Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
-CreateBackup
-# ----
-# * Erstellt das Backup der jeweiligen Datein in TopBck
-# ----
-# Zähler, wie viele Dateien kopiert werden sollen
-# * Zeigt an ob alle Dateien erfolgreich Kopiert wurden
+CreateBackup # CreateBackup Funktion aufrufen
+
+
+# Zähler, wie viele Elemente kopiert werden sollen
 $TotalSrcFiles = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+# Zähler, wie viele Elemnte kopiert wurden
 $TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
 
-# nach dem Backup prüfen, ob alle Files kopiert wurden
-$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
 Write-Host "" # Zeilenumbruch
 Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
-if ($TotalSrcFiles -ne $TotalBckFiles) {
-  Write-Host "Das Backup ist Fehlgeschlagen" -BackgroundColor Red -ForegroundColor Black
+if ($TotalSrcFiles -eq $TotalBckFiles) {
+  # Alle Elemente wurden kopiert
+  Write-Host "Das Backup war Erfolgreich" -BackgroundColor Green -ForegroundColor Black
 }
 else {
-  Write-Host "Das Backup war Erfolgreich" -BackgroundColor Green -ForegroundColor Black
+  # Nicht alle Elemente wurden kopiert
+  Write-Host "Das Backup ist Fehlgeschlagen" -BackgroundColor Red -ForegroundColor Black
 }
 
 Stop-Transcript  #Log file abschliessen
 
+Write-Host "Das Programm endet hier" -BackgroundColor White -ForegroundColor Black
