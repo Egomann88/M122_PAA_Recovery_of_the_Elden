@@ -6,17 +6,6 @@ Version: 0.5
 Versionsumschreibung: In der Testphase
 #>
 
-
-$Happy = "Dieses Program wird funktionieren";
-$Sad = "Dieses Program wird nicht funktionieren";
-$whatisit = ""
-if ((Get-Random -Minimum 0 -Maximum 3) -eq 1) {
-  $whatisit = $Happy;
-}
-else {
-  $whatisit = $Sad;
-}
-
 Write-host $whatisit -ForegroundColor Black -BackgroundColor white
 
 # ----
@@ -32,12 +21,13 @@ $date = Get-Date -Format "dd.MM.yyyy HH:mm:ss" # Akutelles Datum speichern
 
 # Logdatei erstellen
 # todo: Sollte ersetzt werden, da zu viel im Log steht
-# Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
-
+Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
+deleteThis
+CreateBackup
 # ----
 # Einfaches Kopieren
 # ? Könnte anders gelöst werden
-$BackupFilesSrc = $TopSrc # Objekt(e), das / die kopiert werden soll
+$BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
 $BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
 # Zähler, wie viele Dateien kopiert werden sollen
@@ -45,25 +35,23 @@ $BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 $TotalSrcFiles = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
 $TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
 
-# ! Erstellt das Backup der jeweiligen Datein in TopBck //// Testversion
-Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
-  $targetFile = $TopBck + $_.FullName.SubString($TopSrc.Length);
-  if ($_.PSIsContainer) {
-    New-Item -Path ($targetFile) -ItemType "directory" -Force
-    <# Copy-Item  -Path ($TopSrc + $_) -Recurse -Destination ($TopBck + $_) -Force #> # ! Leftover Code
- }
-  else {
-    Copy-Item  -Path ($_.Fullname) -Destination ($targetFile ) -Force -Container
+# ----
+# * Erstellt das Backup der jeweiligen Datein in TopBck
+# ----
+function CreateBackup() {
+  Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
+    $targetFile = $TopBck + $_.FullName.SubString($TopSrc.Length);
+    if ($_.PSIsContainer) {
+      New-Item -Path ($targetFile) -ItemType "directory" -Force
+      <# Copy-Item  -Path ($TopSrc + $_) -Recurse -Destination ($TopBck + $_) -Force #> # ! Leftover Code
+    }
+    else {
+      Copy-Item  -Path ($_.Fullname) -Destination ($targetFile ) -Force -Container
+    }
   }
 }
 
-<# for ($shit = 0; $shit -lt 2; $shit++) {
-
-  $shitshit = Get-ChildItem -Path $BackupFilesSrc 
-  Copy-Item  -Path $shitshit -Destination $TopBck -Force -Recurse
-} #>
-
-# nach dem Bck prüfen, ob alle Files kopiert wurden
+# nach dem Backup prüfen, ob alle Files kopiert wurden
 $TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
 Write-Host "" # Zeilenumbruch
 Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
@@ -74,19 +62,7 @@ else {
   Write-Host "Das Backup war Erfolgreich" -BackgroundColor Green -ForegroundColor Black
 }
 
-# Stop-Transcript  Log file abschliessen
-
-
-
-# ----
-# * Erstellt das Backup der jeweiligen Datein in TopBck //// Finale Version
-# ----
-function CreateBackup() {
-  # ? Komplett unbrauchbar
-  Copy-Item -Path $BackupFilesSrc -Destination $TopBck -Force # Dateien kopieren
-  Get-ChildItem -Recurse # Überprüfen ob Objekt kopiert wird
-  
-}
+Stop-Transcript  #Log file abschliessen
 
 # ---------------------------------------------------------------------------------
 # * Sekundäre Funktionen
@@ -106,7 +82,6 @@ function lastChangeDate() {
   $pattern.Replace($txtFileContent, 'Letzte Änderung: ' + $date, 1) | Set-Content $file
 }
 
-
 # * Säubert die Konsole
 function cl {
   Clear-Host
@@ -115,4 +90,16 @@ function cl {
 # * Zeigt Status des erfolgreichen Abschliessens an
 function CreateLog {
   # Add-Content <File> -Value <LogText> # (Log-)Datei etwas anf�gen
+}
+
+function deleteThis {
+  $Happy = "Dieses Program wird funktionieren";
+  $Sad = "Dieses Program wird nicht funktionieren";
+  $whatisit = ""
+  if ((Get-Random -Minimum 0 -Maximum 3) -eq 1) {
+    $whatisit = $Happy;
+  }
+  else {
+    $whatisit = $Sad;
+  }
 }
