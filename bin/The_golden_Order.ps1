@@ -37,7 +37,7 @@ $date = Get-Date -Format "dd.MM.yyyy HH:mm:ss" # Akutelles Datum speichern
 # ----
 # Einfaches Kopieren
 # ? Könnte anders gelöst werden
-$BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
+$BackupFilesSrc = $TopSrc # Objekt(e), das / die kopiert werden soll
 $BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
 # Zähler, wie viele Dateien kopiert werden sollen
@@ -47,13 +47,13 @@ $TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsConta
 
 # ! Erstellt das Backup der jeweiligen Datein in TopBck //// Testversion
 Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
-
+  $targetFile = $TopBck + $_.FullName.SubString($TopSrc.Length);
   if ($_.PSIsContainer) {
-    New-Item -Path ($TopBck + $_.Name) -ItemType "directory"
-    <#  Copy-Item  -Path ($TopSrc + $_) -Recurse -Destination ($TopBck + $_) -Force  #>
-  }
+    New-Item -Path ($targetFile) -ItemType "directory" -Force
+    <# Copy-Item  -Path ($TopSrc + $_) -Recurse -Destination ($TopBck + $_) -Force #> # ! Leftover Code
+ }
   else {
-    Copy-Item  -Path ($_.Fullname) -Destination ($TopBck + $_.Parent + '\' + $_) -Force
+    Copy-Item  -Path ($_.Fullname) -Destination ($targetFile ) -Force -Container
   }
 }
 
