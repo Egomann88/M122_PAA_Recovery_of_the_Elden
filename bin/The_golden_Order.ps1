@@ -5,39 +5,19 @@ Erstellt von: Dominic Tosku & Justin Urbanek
 Version: 0.5
 Versionsumschreibung: In der Testphase
 #>
-
-Write-host $whatisit -ForegroundColor Black -BackgroundColor white
-
+ Write-host $whatisit -ForegroundColor Black -BackgroundColor white
 # ----
 # Gloable Variablen
 # ----
 $TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
 $TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\" # Verzeichnis indem die Files abgelegt werden
 $date = Get-Date -Format "dd.MM.yyyy HH:mm:ss" # Akutelles Datum speichern
+$BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
+$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
 # ---------------------------------------------------------------------------------
 # * Backup Funktionen
 # ---------------------------------------------------------------------------------
-
-# Logdatei erstellen
-# todo: Sollte ersetzt werden, da zu viel im Log steht
-Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
-deleteThis
-CreateBackup
-# ----
-# Einfaches Kopieren
-# ? Könnte anders gelöst werden
-$BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
-$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
-
-# Zähler, wie viele Dateien kopiert werden sollen
-# * Zeigt an ob alle Dateien erfolgreich Kopiert wurden
-$TotalSrcFiles = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
-$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
-
-# ----
-# * Erstellt das Backup der jeweiligen Datein in TopBck
-# ----
 function CreateBackup() {
   Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
     $targetFile = $TopBck + $_.FullName.SubString($TopSrc.Length);
@@ -50,20 +30,6 @@ function CreateBackup() {
     }
   }
 }
-
-# nach dem Backup prüfen, ob alle Files kopiert wurden
-$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
-Write-Host "" # Zeilenumbruch
-Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
-if ($TotalSrcFiles -ne $TotalBckFiles) {
-  Write-Host "Das Backup ist Fehlgeschlagen" -BackgroundColor Red -ForegroundColor Black
-}
-else {
-  Write-Host "Das Backup war Erfolgreich" -BackgroundColor Green -ForegroundColor Black
-}
-
-Stop-Transcript  #Log file abschliessen
-
 # ---------------------------------------------------------------------------------
 # * Sekundäre Funktionen
 # ---------------------------------------------------------------------------------
@@ -103,3 +69,28 @@ function deleteThis {
     $whatisit = $Sad;
   }
 }
+
+# Logdatei erstellen
+Start-Transcript C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt
+CreateBackup
+# ----
+# * Erstellt das Backup der jeweiligen Datein in TopBck
+# ----
+# Zähler, wie viele Dateien kopiert werden sollen
+# * Zeigt an ob alle Dateien erfolgreich Kopiert wurden
+$TotalSrcFiles = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+
+# nach dem Backup prüfen, ob alle Files kopiert wurden
+$TotalBckFiles = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+Write-Host "" # Zeilenumbruch
+Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
+if ($TotalSrcFiles -ne $TotalBckFiles) {
+  Write-Host "Das Backup ist Fehlgeschlagen" -BackgroundColor Red -ForegroundColor Black
+}
+else {
+  Write-Host "Das Backup war Erfolgreich" -BackgroundColor Green -ForegroundColor Black
+}
+
+Stop-Transcript  #Log file abschliessen
+
