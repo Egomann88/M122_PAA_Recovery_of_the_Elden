@@ -1,0 +1,156 @@
+Tip: Talk to her several times when you find her at Stormhill Shack until she gives you the Spirit Jellyfish Ashes.
+
+Introduction
+
+    "Everyone's...been grafted. Everyone who came with me.
+    They crossed the sea for me. They fought, for me.
+    Heh... Only to have their arms taken. Their legs taken.
+    Even their heads...taken. Taken and stuck to the spider.
+    Did you know? If you're grafted by the spider, you become a chrysalid.
+    It's quite the lark, when you think about it."
+
+When visiting at Stormhill Shack
+
+    "You're all on your own, are you? And heading to Stormveil Castle?
+    Enticed by the one in the white mask, I suppose.
+    Oh, you've come to be one with the spider?
+    Well, that makes us two peas in a pod. But I don't have your courage.
+    It's scary, you know. Having your arms cut off. Or legs. Or your head.
+    I want to be like everyone else, but I'm just too scared.
+    I'm nothing but a craven."
+    "It was a pleasure to see you.
+    Oh, can you pass on a message for me, if you see the little chrysalids in Stormveil Castle?
+    Tell them I love them. And that, despite my craven heart, I'm sure I'll be joining their club soon enough.
+    I'm finally getting the hang of this whole "pain" thing, you know."
+    "Oh, I know. Can you take this little one along with you?"
+    [Gives you the Spirit Jellyfish Ashes]
+    "The poor thing deserves someone braver than myself...
+    And the spirits look rather fondly upon you.
+    It'll be glad of your company, I think, the little'un".
+    "A pleasure to see you.
+    Did you give the little chrysalids the message?
+    That I love them. And that, despite my craven heart, I'm sure I'll be joining their club soon enough".
+
+Upon receiving Chrysalids' Memento
+
+    "What's this? A keepsake? From my men?
+    Oh, goodness me... I can't... They all...believed in me.
+    They all thought I'd make something of myself. Me! Who can't do anything...
+    I think I'll head to the Roundtable Hold. Perhaps I'll find my purpose there".
+
+Upon attacking / rolling / jumping
+
+    "You're willing to make me a chrysalid? Ah, but I'm still a milksop craven... I can't even govern myself to step beyond the bounds of this ward. Please. You're only wasting your strength."
+    "I know you you must feel. But please, I'm not ready. Or are you like me? You're so far out of your mind with fear? You've divested yourself of all reason?"
+    "Please stop. Even if you persist, your fear will not abate."
+
+At Roundtable Hold
+
+    "Greetings. Nice to see you again.
+    My name is Roderika. I should have told you sooner. Isn't this place impressive, though?
+    The Roundtable Hold, covert quarters of the Two Fingers, and gathering place of champions who vie to become Elden Lord.
+    I never knew the guidance bestowed upon us Tarnished had such fantastic roots.
+    Although, it's all a bit much for me, in truth. I'm still looking for my own purpose".
+    "Oh, and... Please, allow to me to express my thanks. For giving me that keepsake from my men.
+    It was as if I was frozen with self-pity. I failed them at every turn. You have my gratitude.
+    Please, take this".
+    [Gives you x1 Golden Seed]
+    It's all a bit much for me, in truth.
+    I'm still looking for my own purpose.
+
+After asking Smithing Master Hewg about her
+
+    "A pleasure to see you. Thank goodness you're safe. I'm still looking for my own purpose.
+    It's not easy, by any means, but it's what I must do."
+    (Tell her what the blacksmith said) "You're telling me I possess some kind of gift? I don't believe you. But...
+    If I do have this talent, and goodness knows it would be my first...
+    I suppose I should try to hone it. Shouldn't I? I'll ask Master Hewg to teach me.
+    Certainly, he does appear intimidating, and holds no love for us Tarnished...
+    But I know he's trapped here, at the Roundtable Hold... So...
+    I can tell. He's a gentle soul, underneath it all".
+    "If I do have a talent for spirit tuning, and goodness knows that would be a surprise...
+    I suppose I should try to hone it. Shouldn't I? I'll ask Master Hewg to teach me".
+
+Next visit after asking Smithing Master Hewg to take care of her
+
+    "Good to see you again. Thank you very much!
+    I have you to thank, don't I? For persuading Master Hewg?
+    I can happily announce that he has taught me the noble toil of spirit tuning.
+    I'm as yet unsure of what I might be able to accomplish, but if I might be any help to you all, I'd certainly like to try.
+    And if there's an chance to ease the suffering of my dear men who were grafted..
+    Well, I certainly must try.
+    Roderika the spirit tuner prentice. Pleased to make your acquaintance".
+
+Please (only available if you didn't receive the Spirit Jellyfish Ashes in Stormhill)
+
+    "I'd like to ask you a small favour. Can you take this little one along with you?
+    They can't be summoned here. But the spirits look rather fondly upon you.
+    It'll be glad of your company, I think, the little'un."
+    [Gives you Spirit Jellyfish Ashes]
+
+After a certain amount of Spirit Tuning
+
+    "I feel like I'm really coming to grips with spirit tuning of late.
+    I can understand their yearnings, what they become drawn to...
+    Master Hewg said it himself, actually, that I'm no mere prentice any longer
+    Once again, I'm pleased to make your acquaintance. Roderika the certified spirit tuner".
+
+When visiting at Roundtable Hold
+
+    "Greetings. Are you here for spirit tuning?"
+
+After burning the Erdtree
+
+    "Take a look around. The Roundtable Hold is burned. Razed to the ground.
+    Don't worry, I don't blame you. I'll continue sprit tuning just the same as before.
+    Which is why I need your help persuading Master Hewg to leave.
+    His roots are so knotted in this place. He won't last much longer if he stays here...
+    His shackles are broken. He's a free man, now. 
+    It's high time he put the Roundtable behind him"
+
+Next visit after speaking to Smithing Master Hewg
+
+    "So Master Hewg won't listen to you, either.
+    You have my thanks, regardless.I'll try and talk him round next time.
+    I know he was given this great entreaty; to craft a weapon which could slay a god.
+    Though I can't help but think of it as a curse. A fearsome curse, put on him by Queen Marika.
+    And if that's the case, I'm not sure there's anything we can do"
+
+After completing Crumbling Farum Azula and speaking to Hewg
+
+    "Ah. So it wasn't just me this happened to... To think he'd forget who you were, as well.
+    I knew he'd burn himself out, old Hewg.
+    I think we could talk him into leaving the Roundtable Hold, now.
+    But maybe it's better that we don't. It's only proper that we respect his choice to stay."
+    "I'll remain with Hewg. He made me who I am today.
+    I'd like to return the kindness, in whatever small way I can."
+    "Please, become Elden Lord. Hewg was always saying that you were a Lord, to him.
+    So slay her, with the weapons he smithed. Slay the god, Marika, who cursed us all."
+
+There's something you should know (the first time Dung Eater visits the Roundtable Hold)
+
+    "A little while ago someone started lurking in the wing on the opposite side of the roundtable.
+    And I can hear, from all the way over there...
+    The howling and wailing of spirits in fear of a curse. I can ever hear the repulsive, twisted malison itself...
+    A plethora of spirits in an unceasing cacophony...
+    I can't even imagine. How much suffering, inflicted to who knows how many souls...
+    You should keep your distance, I know you're strong, but please."
+
+About the spirits' voices (after Dung Eater leaves the Roundtable Hold)
+
+    "I suppose the Dung Eater must have left the Roundtable.
+    I just pray nothing ill comes of this."
+
+Please take care (when Dung eater comes back to the Roundtable Hold)
+
+    "He's back. The Dung Eater. Again.
+    I can hear them; the spirits as they howl and lament in fear of the curse.
+    And worse than ever, the reverberation of the twisted malison itself.
+    But after all this time, I've started to grasp it now.
+    I can hear, in the malison, another fearsome Order."
+
+About the spirits' voices (after Dung Eater's quest ends and he leaves the Roundtable Hold for a second time)
+
+    "But it isn't like last time.
+    I'm almost certain...the spirits have escaped their confinement.
+    Did you...have anything to do with it, I wonder?"
