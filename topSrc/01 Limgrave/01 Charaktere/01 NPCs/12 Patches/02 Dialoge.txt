@@ -1,0 +1,127 @@
+Einführung
+
+Getrübt, sind wir? Ein Wunder, dass Sie hier auftauchen sollten.
+Ich bin Sellen, ein Zauberer, ganz klar. Warum bist du hier?
+
+Wenn angegriffen
+
+Was bedeutet das? Wie unglücklich. <verschwindet>
+Du machst mich traurig, mein Lehrling.
+(Beim Töten eines Spielers) Eine Zeit lang glaubte ich, wir seien verwandte Seelen. Mein Lehrling...
+
+Nachdem du gesagt hast, dass du Zauberei lernen willst
+
+Ahh, ein Yen für Glitzerstein-Zaubereien? Nun, Ihre Begabung scheint ... passabel zu sein. Aber man muss seine Meister weise wählen.
+Ich wurde als verachtete, abtrünnige Hexe aus der Akademie von Raya Lucaria verbannt. Willst du trotzdem von mir lernen?
+
+Ich will noch lernen
+
+Nun, du bist ein Stück Arbeit. Sehr gut. Du bist jetzt mein Protegé in der Glitzersteinzauberei. Aber ich weigere mich zu hätscheln. Oder werfen Sie freundliche Worte. Niemals.
+Erwarten Sie Beschwerden, junger Lehrling.
+[Nicken in Gedanken Geste empfangen]
+
+Besuch
+
+Junger Lehrling, das Wichtigste zuerst. Du bist eine Kaulquappe, wenn es um Magie geht. Infantil. Ohne die Beine zum Gehen.
+Um also ein Zauberer zu werden, musst du dich zuerst deiner Unwissenheit stellen. Fangen wir jetzt an zu lernen?
+
+Nach dem Kauf einiger Zauberei
+
+Unsere Kräfte beziehen sich auf die Kräfte, die in Glitzerstein eingebettet sind, aber was ist die Natur einer solchen Kraft? Glintstone ist der Bernstein des Kosmos, goldener Bernstein enthält die Überreste des alten Lebens und beherbergt seine Vitalität, während Glintstone Restleben enthält. Und damit die Vitalität der Sterne. Es sollte nicht vergessen werden, dass die Zauberei aus Glitzersteinen das Studium der Sterne und des Lebens darin ist.
+
+Ihr die Schriftrolle des Königshauses geben
+
+Oh, ist das eine Schriftrolle? Versetzt mich zurück in meine Akademiezeit. Sehr gut. Das ist Zauberei, die mir nicht ganz unbekannt ist. Ich werde es auf jeden Fall in einen Ihrer Unterrichtsstunden einbauen. Verliere niemals diesen wissbegierigen Geist, mein Lehrling.
+
+Während er in den Ruinen von Witchbane eingesperrt war
+
+Es wird nichts nützen, ich schwöre es ... und doch beharrst du darauf, du schäumende Entartung ... A ... argh!
+
+Zeigen Sie das Einführungsschreiben von Seluvis für Sellen
+
+Nun gut ... Seluvis ist kein Name, den ich jemals wieder hören wollte ... Aber gut. Wenn es dir hilft, mein Lehrling, biete ich mein Wissen an. Die Sterne ändern das Schicksal der karischen Königsfamilie. Und das Schicksal deiner Herrin, Ranni. Aber vor langer Zeit forderte General Radahn die wirbelnden Konstellationen heraus und stoppte in einem vernichtenden Sieg ihre Zyklen. Jetzt ist er die Kraft, die die Sterne abstößt. Wenn General Radahn sterben würde, würden die Sterne ihre Bewegung wieder aufnehmen. Und so würde auch Rannis Schicksal.
+
+Zeigen Sie Azurs Zauberei
+
+Ah, dann hast du Meister Azur gesehen. Meister Azur war einer der Gründungszauberer von Glitzersteinen und mein erster Lehrer. Ein strenger Menschenkenner, aber er muss etwas in dir gesehen haben. Du machst uns beide stolz. Wir können später weiter sprechen, mein Lehrling.
+
+Erzähl mir deine Geschichte
+
+Wenn Sie sich erinnern, wurde ich von der Akademie von Raya Lucaria verbannt. Es war für den Versuch, den urzeitlichen Strom der Glitzersteinzauberei wiederherzustellen. Die zahnlose Pedanterie der karischen Königsfamilie kann von mir aus verrotten. Ich möchte Glitzerstein-Zaubereien, die unseren Geist öffnen, frei von irdischen Tabus. Egal, was wir zurückgeben. Mein Lehrling. Ich vermute nichts. Lehrer und Schüler sind nicht verpflichtet, denselben Weg zu gehen. Aber hör mir zu, mein Lehrling. Ich brauche deine Hilfe, um den urzeitlichen Strom der Glitzerstein-Hexerei wiederherzustellen. Vielleicht ist dies eine Reise, die wir gemeinsam unternehmen könnten?
+(Lasst uns zusammen reisen) Großartig. Ich danke dir. Das gefällt mir. Es ist viel zu lange her, dass ich einen gleichgesinnten Geist gefunden habe. Sie müssen einen fabelhaften Lehrer haben.
+
+Ich muss Sie um einen Gefallen bitten
+
+Ich brauche deine Hilfe, mein Lehrling. Meister Lusat ist ein weiterer Gründungs-Glintstone-Zauberer. Und wie Meister Azur wurde er von der Akademie verbannt. Jetzt schmachtet er, irgendwo eingesperrt. Mein Lehrling, kannst du Meister Lusat finden? Mit diesem Glitzersteinschlüssel solltet Ihr in der Lage sein, die Grenze zu überqueren, die ihn umgibt.
+Ich brauche ihn, um den Urstrom der Glitzerstein-Hexerei wiederherzustellen. Er ist fast ein Kind der Sterne, so ist sein Körper jetzt ...
+
+Führen Sie auf Lusat
+
+Nach seinem Ausschluss aus der Akademie habe ich gehört, dass Meister Lusat in seine Heimat zurückgekehrt ist. Ein Ort namens Sellia in der östlichen Caelid-Wildnis. Als ich darüber nachdachte, erhielt ich den Glitzersteinschlüssel, den ich Euch von einem sellianischen Zauberer gegeben hatte. Es wäre kein großer Sprung anzunehmen, dass er immer noch in der Nähe eingepfercht ist.
+
+Nach dem Treffen mit Meister Lusat
+
+Mein Lehrling. Geben Sie mir einen Moment später. Ich muss Sie um einen Gefallen bitten.
+Wer hätte das ahnen können. Was für ein Ort, um Meister Lusat zu finden ... Euch gilt meine Dankbarkeit. Das ist alles Ihre Arbeit. Ich freue mich sehr, Sie als Lehrling und Seelenverwandten zu haben. Dies ist nur ein Zeichen meines Dankes. Bitte nimm es.
+Das bringt uns einen ganzen Schritt näher. Die Gremien der Masters Azur und Lusat können in die Akademie aufgenommen werden. Wenn ich nur diese elenden Fesseln lösen könnte...
+
+Über die Anfrage
+
+Die Form, die Sie vor sich sehen, ist lediglich eine Projektion. Mein Körper liegt woanders. Aber die Fesseln der Akademie verhindern, dass sie bewegt wird. Mein Leichnam befindet sich auf der Weeping Peninsula, an der Südspitze der Lands Between, eingesperrt in den Ruinen gleich unterhalb der Kirche von Marika, hinter der Ebene des Wandernden Mausoleums. Kannst du die Reise zu meinem Körper machen? Ich habe etwas, dem ich nur bei dir vertrauen kann.
+
+In den Ruinen von Witchbane (nachdem sie von ihrer Bitte gehört hat)
+
+Mein Lehrling, danke fürs Kommen. Diese Fesseln belasten uns alle. Es gibt etwas, um das du dich kümmern musst. Mein ursprünglicher Glitzerstein. Ein Stern ist gefallen, und mein Schicksal schwankt. jemand kann für mein Leben kommen. Und so vertraue ich es dir an. Mich selbst.
+Danke ... mein Lehrling ... Das ... ist meine Essenz. Bitte behandeln Sie es mit Sorgfalt.
+Behandle es mit Sorgfalt, mein Lehrling ... Was du hältst, ist mein Wesen ...
+
+Verwenden von Sellens Primal Glintstone im geheimen Raum der Three Sisters
+
+Mein Lehrling, wie lange ist das her? Vielen Dank. Du hast mir geholfen, wieder einmal einen neuen Körper zu füllen. Und es ist wirklich ein Juwel. Jung und voller Elan, genau richtig für meinen Primal Glintstone. Besser noch, ich habe diese schrecklichen Fesseln abgeworfen. Endlich kann ich zur Akademie zurückkehren. Um die karische Königsfamilie zu vertreiben und den Urstrom wiederherzustellen. Mein lieber Lehrling, das alles verdanke ich dir.
+
+Jerren herausfordern
+
+Jerren, Bringer meines Todes.
+Ihnen gilt meine Dankbarkeit. Dass du mich von meinen Fesseln befreit hast.
+Aber ich fürchte, Ihre Arbeit ist getan.
+Tritt der Schule bei. Um über deinen Fehler nachzudenken.
+
+Nach dem Sieg über Jerren
+
+Ahh, mein Lehrling.
+Du hast meine Haut wieder einmal gerettet.
+Siehst du das? Die Königin von Caria ist nicht mehr.
+Mit den zurückgekehrten Körpern der Meister Azur und Lusat kann die Akademie den urzeitlichen Strom verfeinern.
+Damit wir, gefallene Kinder der Sterne, wieder strahlend strahlen.
+Mein Lehrling. Bleiben Sie bei uns, hier in der Akademie?
+Oh, ich weiß, es ist nicht möglich.
+Du hast deine eigene Berufung. Der nächste Elden Lord zu sein.
+Aber denk an mich.
+Von deinem Lehrer. Am Vorabend deiner Krönung.
+Du wirst immer mein geliebter Schüler sein.
+Seien Sie versichert, dass ich...
+Nein, die gesamte Akademie wird dem neuen Monarchen die Treue schwören.
+Mein Lehrling. Werde Elden Lord.
+Hmm. Vielleicht springe ich voraus,
+aber hier ist ein Symbol meiner Treue und der Akademie.
+(gibt Glintstone Kris)
+Erinnerst du dich, was ich dir einmal gesagt habe?
+Dieser Glitzerstein ist der Bernstein des Kosmos, und Zauberei ist das Studium der Sterne und des Lebens darin.
+Wenn du Elden Lord wirst, erleuchte mich bitte.
+Enthülle die Geheimnisse des Lebens, die den Elden Ring durchziehen.
+Das nächste Mal werde ich dein Schüler sein.
+Ach, noch was.
+Wenn es dir nicht gelingt, deinen Thron zu beanspruchen,
+Sie können mich jederzeit besuchen.
+Ach, keine Sorge. Auch meine langweiligsten Schüler haben hier immer einen Platz.
+
+Nach dem Neuladen des Bereichs
+
+Äh ... weh. M-mein...Lehrling...ich-ich bin...
+
+Sonstiges
+
+(Folgebesuche)
+Da bist du, mein Lehrling. Sollen wir mit dem Unterricht beginnen?.
+(Wieder sprechen ohne neu zu laden)
+Sie möchten den Unterricht fortsetzen? Sehr gut, ich habe viel Zeit.

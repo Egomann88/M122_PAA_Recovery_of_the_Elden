@@ -1,0 +1,19 @@
+Item Name 	Item Type 	runes currency elden ring wiki guide 18Purchase Value 	Availability
+Glintstone Pebble 	Sorceries 	1,000 	Always
+Glintstone Stars 	Sorceries 	3,000 	Always
+Glintstone Arc 	Sorceries 	1,500 	Always
+Crystal Barrage 	Sorceries 	1,500 	Always
+Scholar's Armament 	Sorceries 	3,000 	Always
+Scholar's Shield 	Sorceries 	2,500 	Always
+Glintblade Phalanx 	Sorceries 	2,500 	Requires Royal House Scroll
+Carian Slicer 	Sorceries 	1,500 	Requires Royal House Scroll
+Great Glintstone Shard 	Sorceries 	2,000 	Requires Academy Scroll
+Swift Glintstone Shard 	Sorceries 	600 	Requires Academy Scroll
+Glintstone Cometshard 	Sorceries 	12,000 	Requires Conspectus Scroll
+Star Shower 	Sorceries 	10,000 	Requires Conspectus Scroll
+Shard Spiral 	Sorceries 	8,000 	After siding with her at the end of her questline
+Celistial Spear Sorceries       12,000  After siding with her at the end of her questline
+Glinstone OriginSorceries       20,000  After siding with her at the end of her questline
+Carian Arc      Sorceries       10,000  After siding with her at the end of her questline
+Carian Queenslayer      Sorceries       25,000  After siding with her at the end of her questline
+Living Failures Sorceries       15,000  Requires Scroll of the Depps
