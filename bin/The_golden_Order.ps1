@@ -85,6 +85,18 @@ function checkHash ([string]$Hash1, [string]$Hash2) {
   }
 }
 
+# Öffnet den Explorer zum Pfade auswählen
+
+Function Get-Folder($initialDirectory) {
+  Add-Type -AssemblyName System.Windows.Forms
+  [void] [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms')
+  $FolderBrowserDialog = New-Object System.Windows.Forms.FolderBrowserDialog
+  $FolderBrowserDialog.RootFolder = 'MyComputer'
+  if ($initialDirectory) { $FolderBrowserDialog.SelectedPath = $initialDirectory }
+  [void] $FolderBrowserDialog.ShowDialog()
+  return $FolderBrowserDialog.SelectedPath
+}
+
 # Erstellt eine Log File
 # Informationen über alle Kopierten Dateien
 function CreateLog {
