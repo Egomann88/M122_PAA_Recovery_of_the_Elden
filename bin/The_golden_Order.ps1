@@ -11,8 +11,7 @@ Versionsumschreibung: In der Testphase
 # -------------------------------------------------------------
 $date = Get-Date -Format "dd.MM.yyyy HH-mm-ss" # Akutelles Datum speichern
 [string]$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
-[string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\Backup $date\" # Verzeichnis indem die Files abgelegt werden
-[string]$BackupFilesSrc = $TopSrc + "\*" # Objekt(e), das / die kopiert werden soll
+[string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\Backup $date\" # Verzeichnis indem die Files abgelegt werde
 # [string]$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
 # -------------------------------------------------------------
@@ -26,23 +25,43 @@ Write-host "Das Backup wird gestartet" -ForegroundColor Black -BackgroundColor w
 
 # Kopiert Elemente von Src und fügt diese in Bck ein
 function CreateBackup {
+  <# Diese Funktion nimmmt als Parameter zwei Pfade an #>
   Param(
     [string]$PathSrc = $TopSrc, # Pfad aus dem ein Backup erstellt werden soll / Default TopSrc
     [string]$PathBck = $TopBck # Pfad in welchem das Backup erstellt werden soll / Default TopBck
   )
+  [string]$BackupFilesSrc = $PathSrc + "\*" # Objekt(e), das / die kopiert werden soll
   # Holt alle Elemnte im Src Verzeichnis
   Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
     [string]$targetFile = $PathBck + $_.FullName.SubString($PathSrc.Length); # Sorgt dafür das im Pfad die Überodner sind
     # Überprüft, ob das akutelle Element ein Ordner ist
     if ($_.PSIsContainer) {
-      New-Item -Path ($targetFile) -ItemType "directory" -Force # Neuen Ordner erstellen
+      try {
+        <# Versucht einen neuen Ordner zu erstellen #>
+        New-Item -Path ($targetFile) -ItemType "directory" -Force | Out-Null
+        Write-Host -ForegroundColor Green "Verzeichnis erfolgreich erstellt '$targetFile'."
+      }
+      catch {
+        <# Der Ordner konnte nicht erstellt werden, evtl fehlen Schreibrechte.
+           Ein Fehler wird ausgegeben #>
+        Write-Error -Message "Ein Fehler beim erstellen von '$targetFile'. Fehler war: $_"
+        Exit
+      }
     }
     # Element ist ein File
     else {
-      Copy-Item  -Path ($_.Fullname) -Destination ($targetFile) -Force -Container # kopiert Element, ins Bck Verzeichnis  
+      try {
+        Copy-Item  -Path ($_.Fullname) -Destination ($targetFile) -Force -Container | Out-Null  # kopiert Element, ins Bck Verzeichnis
+        Write-Host -ForegroundColor Green "Datei erfolgreich erstellt '$targetFile'."
+      }
+      catch {
+        <# Die Datei konnte nicht erstellt werden, evtl fehlen Schreibrechte.
+           Ein Fehler wird ausgegeben #>
+        Write-Error -Message "Ein Fehler beim erstellen von '$targetFile'. Fehler war: $_"
+      }
     }
   }
-
+  Write-Host "Bitte warten Sie einen Moment, Prozesse laufen noch......." -ForegroundColor Yellow
   $result = controllBackup $PathSrc $PathBck # Ruft funktion zur Überprüfung auf und speichert Rückgabewert
   Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black #Gibt Resultat in Grün oder Rot an
 }
@@ -56,6 +75,7 @@ function controllBackup([string]$checkSrc, [string]$checkBck) {
 
   Write-Host "" # Zeilenumbruch
   Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
+  Write-Host "Bitte warten Sie einen Moment, Prozesse laufen noch......." -ForegroundColor Yellow
   
   [boolean]$Korrekt = checkHash $checkSrc $checkBck # Ruft Funktion zum Hash check auf und speichert Ausgabe
   if ($Korrekt) {
@@ -73,7 +93,7 @@ function checkHash ([string]$Hash1, [string]$Hash2) {
   # Weisst den Hash aller Files im Source Ordner einer Variablen zu
   [string]$SrcHash = (Get-ChildItem -Path $Hash1 -Recurse | Where-Object { !($_.PSIsContainer) }) |
   ForEach-Object { (Get-FileHash -Path $_.FullName -a md5).Hash };
-   # Weisst den Hash aller Files im Backup Ordner einer Variablen zu
+  # Weisst den Hash aller Files im Backup Ordner einer Variablen zu
   [string]$BackHash = (Get-ChildItem -Path $Hash2 -Recurse | Where-Object { !($_.PSIsContainer) }) |
   ForEach-Object { (Get-FileHash -Path $_.FullName -a md5).Hash };
   # Stimmt der Hash des Source und Backup Ordner überei?
@@ -81,12 +101,12 @@ function checkHash ([string]$Hash1, [string]$Hash2) {
     return 1 # Backup ist erfolgreich ausgeführt worden
   }
   else {
+    Write-Host "Hashwerte des Quel und Ziel Pfades nicht gleich!" -ForegroundColor red
     return 0 # Backup ist fehlgeschlagen
   }
 }
 
-# Öffnet den Explorer zum Pfade auswählen
-
+# Öffnet ein GUI mit Explorer zum Pfad Quel Pfad auswählen
 Function Get-Folder($initialDirectory) {
   Add-Type -AssemblyName System.Windows.Forms
   [void] [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms')
@@ -109,8 +129,8 @@ function cl {
   Clear-Host
 }
 
-# Letztes Änderungsdatum in diesen Powershell-Skript wird überschrieben 
-# ACHTUNG: Kann die Source File zerstören
+# Letztes Ausführdatum in diesen Powershell-Skript wird überschrieben 
+# ACHTUNG: Kann die Source File zerstören wenn das Regex nicht beachtet wird
 function lastChangeDate() {
   Set-Location -path "C:\M122_PAA_Recovery_of_the_Elden\bin"
   # $Location = Get-Location
