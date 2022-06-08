@@ -11,14 +11,14 @@ PAA - Recovery of the Elden
 - ✅ ist erfüllt
 
 # Auftrag:
-- Backup ❌
-- Log ❌
+- Backup ✅
+- Log ✅
 - Test mit ausgabe ❌
 
 # Abgaben:
-- Powershell ❌
+- Powershell ✅
 - PAP ✅
-- LOG ❌
+- LOG ✅
 - Testfall ❌
 - Testfall ❌
 - Video ❌
@@ -34,11 +34,11 @@ PAA - Recovery of the Elden
   - Globale Variablen: à Dokumentieren sie einzelne Variablen ✅ 
   
   ## Funktionen: Dokumentieren sie:
-  - Zweck der Funktion ❌
-  - Verwendete Parameter ❌
-  - Zweck und Typ der Parameter ❌ 
-  - Evt. Rückgabewert ❌
-  - Evt. Ausgaben ❌
+  - Zweck der Funktion ✅
+  - Verwendete Parameter ✅
+  - Zweck und Typ der Parameter ✅
+  - Evt. Rückgabewert ✅
+  - Evt. Ausgaben ✅
 
   ## Code-Blöcke (in Funktionen): à Was geschieht im Block 
   - Annahmen für die Implementation ❌
