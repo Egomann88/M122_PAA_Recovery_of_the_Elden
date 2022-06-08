@@ -80,11 +80,11 @@ function controllBackup([string]$checkSrc, [string]$checkBck) {
   [boolean]$Korrekt = checkHash $checkSrc $checkBck # Ruft Funktion zum Hash check auf und speichert Ausgabe
   if ($Korrekt) {
     # Alle Elemente wurden kopiert
-    return ("Das Backup war Erfolgreich", "Green") #Gibt String mit Farbe zurück
+    return ("Das Backup war Erfolgreich", "Green") # Gibt String mit Farbe zurück
   }
   else {
     # Nicht alle Elemente wurden kopiert
-    return ("Das Backup ist Fehlgeschlagen", "Red") #Gibt String mit Farbe zurück
+    return ("Das Backup ist Fehlgeschlagen", "Red") # Gibt String mit Farbe zurück
   }
 }
 # !highlight meines Lebens –Path
@@ -101,7 +101,7 @@ function checkHash ([string]$Hash1, [string]$Hash2) {
     return 1 # Backup ist erfolgreich ausgeführt worden
   }
   else {
-    Write-Host "Hashwerte des Quel und Ziel Pfades nicht gleich!" -ForegroundColor red
+    Write-Host "Hashwerte des Quell- und Zielpfades stimmen nicht überein!" -ForegroundColor red
     return 0 # Backup ist fehlgeschlagen
   }
 }
