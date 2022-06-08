@@ -141,6 +141,54 @@ function lastChangeDate() {
   $pattern.Replace($txtFileContent, 'Letzte Änderung: ' + $date, 1) | Set-Content $file
 }
 
+# Öffnet das GUI
+# Funtkioniert momentan nicht in einer Funktion, auspacken zum testen
+function OpenGui() {
+  Add-Type -AssemblyName PresentationFramework
+  $xamlFile = "C:\M122_PAA_Recovery_of_the_Elden\GUI Visual Studio\WpfApp1\MainWindow.xaml"
+  #create window
+  $inputXML = Get-Content $xamlFile -Raw
+  $inputXML = $inputXML -replace 'mc:Ignorable="d"', '' -replace "x:N", 'N' -replace '^<Win.*', '<Window'
+  [XML]$XAML = $inputXML
+
+  #Read XAML
+  $reader = (New-Object System.Xml.XmlNodeReader $xaml)
+  try {
+    $window = [Windows.Markup.XamlReader]::Load( $reader )
+  }
+  catch {
+    Write-Warning $_.Exception
+    throw
+  }
+
+  # Create variables based on form control names.
+  # Variable will be named as 'var_<control name>'
+
+  $xaml.SelectNodes("//*[@Name]") | ForEach-Object {
+    #"trying item $($_.Name)"
+    try {
+      Set-Variable -Name "var_$($_.Name)" -Value $window.FindName($_.Name) -ErrorAction Stop
+    }
+    catch {
+      throw
+    }
+  }
+  Get-Variable var_*
+
+  $var_choicetop.Add_Click( {
+      $TopSrc = Get-Folder
+      $var_topSrc.Text = $TopSrc
+    })
+
+  $var_choicebck.Add_Click( {
+      $TopBck = Get-Folder
+      $var_topBck.Text = $TopBck
+    })
+
+
+  $Null = $window.ShowDialog()
+}
+
 # -------------------------------------------------------------
 # Hauptcode
 # -------------------------------------------------------------
