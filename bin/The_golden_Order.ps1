@@ -10,8 +10,10 @@ Versionsumschreibung: In der Testphase
 # Gloable Variablen
 # -------------------------------------------------------------
 $date = Get-Date -Format "dd.MM.yyyy HH-mm-ss" # Akutelles Datum speichern
+[string]$userMail = "Justin_Urbanek@sluz.ch" # Mail des Nutzers
 [string]$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
 [string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\Backup $date\" # Verzeichnis indem die Files abgelegt werde
+$Global:BckSucces = "" # Endnachricht für Email
 # [string]$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
 # -------------------------------------------------------------
@@ -37,13 +39,13 @@ function CreateBackup {
     # Überprüft, ob das akutelle Element ein Ordner ist
     if ($_.PSIsContainer) {
       try {
-        <# Versucht einen neuen Ordner zu erstellen #>
+        # Versucht einen neuen Ordner zu erstellen
         New-Item -Path ($targetFile) -ItemType "directory" -Force | Out-Null
         Write-Host -ForegroundColor Green "Verzeichnis erfolgreich erstellt '$targetFile'."
       }
       catch {
-        <# Der Ordner konnte nicht erstellt werden, evtl fehlen Schreibrechte.
-           Ein Fehler wird ausgegeben #>
+        # Der Ordner konnte nicht erstellt werden, evtl fehlen Schreibrechte.
+        # Ein Fehler wird ausgegeben
         Write-Error -Message "Ein Fehler beim erstellen von '$targetFile'. Fehler war: $_"
         Exit
       }
@@ -55,15 +57,16 @@ function CreateBackup {
         Write-Host -ForegroundColor Green "Datei erfolgreich erstellt '$targetFile'."
       }
       catch {
-        <# Die Datei konnte nicht erstellt werden, evtl fehlen Schreibrechte.
-           Ein Fehler wird ausgegeben #>
+        # Die Datei konnte nicht erstellt werden, evtl fehlen Schreibrechte.
+        # Ein Fehler wird ausgegeben
         Write-Error -Message "Ein Fehler beim erstellen von '$targetFile'. Fehler war: $_"
       }
     }
   }
   Write-Host "Bitte warten Sie einen Moment, Prozesse laufen noch......." -ForegroundColor Yellow
   $result = controllBackup $PathSrc $PathBck # Ruft funktion zur Überprüfung auf und speichert Rückgabewert
-  Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black #Gibt Resultat in Grün oder Rot an
+  Write-Mail $userMail $result[0] $result[1] # Email mit Fehlschlag versenden
+  Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black # Gibt Resultat in Grün oder Rot an
 }
 
 # Zählt alle kopierten Objekte und ruft Funktion zum kontrollieren auf
@@ -76,15 +79,17 @@ function controllBackup([string]$checkSrc, [string]$checkBck) {
   Write-Host "" # Zeilenumbruch
   Write-Host "Es wurden " $TotalBckFiles " Elemente von " $TotalSrcFiles " kopiert." # Info wie viele Files kopiert wurden
   Write-Host "Bitte warten Sie einen Moment, Prozesse laufen noch......." -ForegroundColor Yellow
-  
+
   [boolean]$Korrekt = checkHash $checkSrc $checkBck # Ruft Funktion zum Hash check auf und speichert Ausgabe
   if ($Korrekt) {
     # Alle Elemente wurden kopiert
-    return ("Das Backup war Erfolgreich", "Green") # Gibt String mit Farbe zurück
+    $BckSucces = "gelungen";
+    return ("Das Backup ist gelungen", "Green") # Gibt String mit Farbe zurück
   }
   else {
     # Nicht alle Elemente wurden kopiert
-    return ("Das Backup ist Fehlgeschlagen", "Red") # Gibt String mit Farbe zurück
+    $BckSucces = "fehlgeschlagen";
+    return ("Das Backup ist fehlgeschlagen", "Red") # Gibt String mit Farbe zurück
   }
 }
 # !highlight meines Lebens –Path
@@ -94,10 +99,10 @@ function checkHash ([string]$Hash1, [string]$Hash2) {
   [string]$SrcHash = (Get-ChildItem -Path $Hash1 -Recurse | Where-Object { !($_.PSIsContainer) }) |
   ForEach-Object { (Get-FileHash -Path $_.FullName -a md5).Hash };
   # Weisst den Hash aller Files im Backup Ordner einer Variablen zu
-  [string]$BackHash = (Get-ChildItem -Path $Hash2 -Recurse | Where-Object { !($_.PSIsContainer) }) |
+  [string]$BckHash = (Get-ChildItem -Path $Hash2 -Recurse | Where-Object { !($_.PSIsContainer) }) |
   ForEach-Object { (Get-FileHash -Path $_.FullName -a md5).Hash };
   # Stimmt der Hash des Source und Backup Ordner überei?
-  if ($SrcHash -eq $BackHash) {
+  if ($SrcHash -eq $BckHash) {
     return 1 # Backup ist erfolgreich ausgeführt worden
   }
   else {
@@ -188,6 +193,40 @@ function OpenGui() {
 
   $Null = $window.ShowDialog()
 }
+# Schreibt eine E-Mail, ob das Backup erfolgreich war oder nicht (mit Logfile)
+function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichkeit) {
+  [string]$log = Get-ChildItem "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt" # aktuelle Logfile
+  [int]$totFilesSrc = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+  # Zähler, wie viele Elemente kopiert wurden
+  [int]$totFilesBck = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+
+
+  if ($farbeDringlichkeit -eq "Green") {
+    [int]$importance = 1
+  }
+  else {
+    [int]$importance = 2
+  }
+  
+  $Outlook = New-Object -ComObject Outlook.Application # Outlook öffnen
+  $Mail = $Outlook.CreateItem(0) # In Outlook (Mail Editor öffnen) / Mail erstellen
+
+  $Mail.To = "$userMail" # E-Mail des Empfängers
+  $Mail.Subject = "$title" # Titel
+  # Nachricht
+  $Mail.Body = "Es wurden $totFilesSrc Elemente von $totFilesBck kopiert.`nGenauere Informationen befinden sich im Anhang."
+  $Mail.importance = $importance # Dringlichkeit
+  try {
+    $Mail.Attachments.Add($log) # Logfile im Anhang hinzufügen
+  }
+  catch {
+    Write-Error "$_"
+  }
+
+  $Mail.Send() # Nachricht senden
+
+  # $Outlook.Quit() # Outlook schliessen
+}
 
 # -------------------------------------------------------------
 # Hauptcode
@@ -195,7 +234,8 @@ function OpenGui() {
 
 # Logdatei erstellen
 Start-Transcript "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt"
-CreateBackup # CreateBackup Funktion aufrufen
+CreateBackup # openGui # CreateBackup Funktion aufrufen
 Stop-Transcript  #Log file abschliessen
+
 
 Write-Host "Das Programm endet hier" -BackgroundColor White -ForegroundColor Black
