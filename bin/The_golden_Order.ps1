@@ -10,10 +10,10 @@ Versionsumschreibung: In der Testphase
 # Gloable Variablen
 # -------------------------------------------------------------
 $date = Get-Date -Format "dd.MM.yyyy HH-mm-ss" # Akutelles Datum speichern
-[string]$userMail = "Justin_Urbanek@sluz.ch" # Mail des Nutzers
 [string]$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
 [string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\Backup $date\" # Verzeichnis indem die Files abgelegt werde
 [string]$TopLog = "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt"
+$Global:userMail = "Justin_Urbanek@sluz.ch" # Mail des Nutzers
 $Global:BckSucces = "" # Endnachricht für Email
 # [string]$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
@@ -182,26 +182,26 @@ function OpenGui() {
   Get-Variable var_*
 
   $var_choiceSrc.Add_Click( {
-      $TopSrc = Get-Folder
-      $var_topSrc.Text = $TopSrc
+      $Global:TopSrc = (Get-Folder + "\")
+      $var_topSrc.Text = ($TopSrc + "\")
+      $Global:TopSrc = $var_topSrc.Text
     })
 
   $var_choiceBck.Add_Click( {
-      $TopBck = Get-Folder
-      $var_topBck.Text = $TopBck
+      $Global:TopBck = Get-Folder
+      $var_topBck.Text = ($TopBck + "\Backup $date\")
+      $Global:TopBck = $var_topBck.Text
     })
 
   $var_choiceLog.Add_Click( {
-      $TopLog = Get-Folder
-      $var_topLog.Text = $TopLog
-    })
-
-  $var_choiceMail.Add_Click( {
-      $var_userMail.Text = $userMail
+      $Global:TopLog = Get-Folder
+      $var_topLog.Text = ($TopLog + "\")
+      $Global:TopLog = $var_topLog.Text
     })
 
   $var_choiceSave.Add_Click( {
-
+      $Global:userMail = $var_userMail.Text
+      CreateBackup
     })
 
   $Null = $window.ShowDialog()
@@ -247,7 +247,7 @@ function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichke
 
 # Logdatei erstellen
 Start-Transcript $TopLog
-openGui # CreateBackup Funktion aufrufen
+OpenGui # CreateBackup Funktion aufrufen
 Stop-Transcript  #Log file abschliessen
 
 
