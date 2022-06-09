@@ -13,7 +13,7 @@ $date = Get-Date -Format "dd.MM.yyyy HH-mm-ss" # Akutelles Datum speichern
 [string]$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
 [string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\Backup $date\" # Verzeichnis indem die Files abgelegt werde
 [string]$TopLog = "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt"
-$Global:userMail = "Justin_Urbanek@sluz.ch" # Mail des Nutzers
+$Global:userMail = "" # Mail des Nutzers
 $Global:BckSucces = "" # Endnachricht für Email
 # [string]$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
@@ -66,7 +66,9 @@ function CreateBackup {
   }
   Write-Host "Bitte warten Sie einen Moment, Prozesse laufen noch......." -ForegroundColor Yellow
   $result = controllBackup $PathSrc $PathBck # Ruft funktion zur Überprüfung auf und speichert Rückgabewert
-  Write-Mail $userMail $result[0] $result[1] # Email mit Fehlschlag versenden
+  if ($userMail -ne ""){
+    Write-Mail $userMail $result[0] $result[1] # Email mit Fehlschlag versenden
+  }
   Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black # Gibt Resultat in Grün oder Rot an
 }
 
