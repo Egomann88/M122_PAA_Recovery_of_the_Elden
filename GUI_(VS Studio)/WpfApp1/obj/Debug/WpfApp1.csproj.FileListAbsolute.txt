@@ -1,0 +1,30 @@
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\bin\Debug\WpfApp1.exe.config
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\bin\Debug\WpfApp1.exe
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\bin\Debug\WpfApp1.pdb
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\WpfApp1.csproj.AssemblyReference.cache
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\MainWindow.g.cs
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\App.g.cs
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\MainWindow.baml
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\WpfApp1.g.resources
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\WpfApp1.csproj.GenerateResource.cache
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\WpfApp1.csproj.CoreCompileInputs.cache
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\WpfApp1.exe
+C:\M122_PAA_Recovery_of_the_Elden\GUI (VS Studio)\WpfApp1\obj\Debug\WpfApp1.pdb
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\bin\Debug\WpfApp1.exe.config
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\bin\Debug\WpfApp1.exe
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\bin\Debug\WpfApp1.pdb
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\WpfApp1.csproj.AssemblyReference.cache
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\MainWindow.g.cs
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\App.g.cs
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\MainWindow.baml
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\WpfApp1.g.resources
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\WpfApp1.Properties.Resources.resources
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\WpfApp1.csproj.GenerateResource.cache
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\WpfApp1.csproj.CoreCompileInputs.cache
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\WpfApp1.exe
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\WpfApp1\obj\Debug\WpfApp1.pdb
