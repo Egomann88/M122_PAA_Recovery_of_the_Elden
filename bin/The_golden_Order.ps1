@@ -13,6 +13,7 @@ $date = Get-Date -Format "dd.MM.yyyy HH-mm-ss" # Akutelles Datum speichern
 [string]$userMail = "Justin_Urbanek@sluz.ch" # Mail des Nutzers
 [string]$TopSrc = "C:\M122_PAA_Recovery_of_the_Elden\topSrc\" # Verzeichnis, vom dem ein Backup gemacht wird
 [string]$TopBck = "C:\M122_PAA_Recovery_of_the_Elden\topBck\Backup $date\" # Verzeichnis indem die Files abgelegt werde
+[string]$TopLog = "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt"
 $Global:BckSucces = "" # Endnachricht für Email
 # [string]$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
 
@@ -150,7 +151,7 @@ function lastChangeDate() {
 # Funtkioniert momentan nicht in einer Funktion, auspacken zum testen
 function OpenGui() {
   Add-Type -AssemblyName PresentationFramework
-  $xamlFile = "C:\M122_PAA_Recovery_of_the_Elden\GUI Visual Studio\WpfApp1\MainWindow.xaml"
+  $xamlFile = "C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\MainWindow.xaml"
   #create window
   $inputXML = Get-Content $xamlFile -Raw
   $inputXML = $inputXML -replace 'mc:Ignorable="d"', '' -replace "x:N", 'N' -replace '^<Win.*', '<Window'
@@ -180,16 +181,28 @@ function OpenGui() {
   }
   Get-Variable var_*
 
-  $var_choicetop.Add_Click( {
+  $var_choiceSrc.Add_Click( {
       $TopSrc = Get-Folder
       $var_topSrc.Text = $TopSrc
     })
 
-  $var_choicebck.Add_Click( {
+  $var_choiceBck.Add_Click( {
       $TopBck = Get-Folder
       $var_topBck.Text = $TopBck
     })
 
+  $var_choiceLog.Add_Click( {
+      $TopLog = Get-Folder
+      $var_topLog.Text = $TopLog
+    })
+
+  $var_choiceMail.Add_Click( {
+      $var_userMail.Text = $userMail
+    })
+
+  $var_choiceSave.Add_Click( {
+
+    })
 
   $Null = $window.ShowDialog()
 }
@@ -233,8 +246,8 @@ function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichke
 # -------------------------------------------------------------
 
 # Logdatei erstellen
-Start-Transcript "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt"
-CreateBackup # openGui # CreateBackup Funktion aufrufen
+Start-Transcript $TopLog
+openGui # CreateBackup Funktion aufrufen
 Stop-Transcript  #Log file abschliessen
 
 
