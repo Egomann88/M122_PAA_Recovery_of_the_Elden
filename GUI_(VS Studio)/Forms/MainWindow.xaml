@@ -1,0 +1,27 @@
+﻿<Window x:Class="Forms.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Forms"
+        mc:Ignorable="d"
+        Title="Backup erstellen" MinHeight="450" Height="450" MaxHeight="450" MinWidth="800" Width="800" MaxWidth="800">
+    <Grid>
+        <Label Content="Wählen Sie den Quellpfad aus" Margin="10,0,0,0" />
+        <TextBox Name="topSrc" Margin="180,5,10,390" /> <!-- left, top, right, bottom  -->
+        <Button Name="choiceSrc" Content="Pfad auswählen" Margin="10,30,10,350" />
+
+        <Label Content="Wählen Sie den Zielpfad aus" Margin="10,75,0,0" />
+        <TextBox Name="topBck" Margin="180,80,10,315" />
+        <Button Name="choiceBck" Content="Pfad auswählen" Margin="10,105,10,275" />
+
+        <Label Content="Wählen Sie den Protokollpfad aus" Margin="10,150,0,0" />
+        <TextBox Name="topLog" Margin="200,155,10,240" />
+        <Button Name="choiceLog" Margin="10,180,10,200" Content="Pfad auswählen" />
+
+        <Label Content="Geben Sie Ihre E-Mail Adresse an" Margin="10,230,0,0" />
+        <TextBox Name="userMail" Margin="200,235,10,160" />
+
+        <Button Name="choiceSave" Margin="75,340,75,30" Content="Backup starten" />
+    </Grid>
+</Window>
