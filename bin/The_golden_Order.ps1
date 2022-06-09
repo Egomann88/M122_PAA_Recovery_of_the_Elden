@@ -83,12 +83,12 @@ function controllBackup([string]$checkSrc, [string]$checkBck) {
   [boolean]$Korrekt = checkHash $checkSrc $checkBck # Ruft Funktion zum Hash check auf und speichert Ausgabe
   if ($Korrekt) {
     # Alle Elemente wurden kopiert
-    $BckSucces = "gelungen";
+    $BckSucces = "gelungen"; # Mail -> Das Backup ist gelungen
     return ("Das Backup ist gelungen", "Green") # Gibt String mit Farbe zurück
   }
   else {
     # Nicht alle Elemente wurden kopiert
-    $BckSucces = "fehlgeschlagen";
+    $BckSucces = "fehlgeschlagen"; # Mail -> Das Backup ist fehlgeschlagen
     return ("Das Backup ist fehlgeschlagen", "Red") # Gibt String mit Farbe zurück
   }
 }
@@ -202,10 +202,10 @@ function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichke
 
 
   if ($farbeDringlichkeit -eq "Green") {
-    [int]$importance = 1
+    [int]$importance = 1 # Erfolgreich ist eine normale Mail 
   }
   else {
-    [int]$importance = 2
+    [int]$importance = 2 # Fehlschlag ist eine dringende Mail
   }
   
   $Outlook = New-Object -ComObject Outlook.Application # Outlook öffnen
@@ -215,7 +215,7 @@ function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichke
   $Mail.Subject = "$title" # Titel
   # Nachricht
   $Mail.Body = "Es wurden $totFilesSrc Elemente von $totFilesBck kopiert.`nGenauere Informationen befinden sich im Anhang."
-  $Mail.importance = $importance # Dringlichkeit
+  $Mail.importance = $importance # Dringlichkeit der Mail
   try {
     $Mail.Attachments.Add($log) # Logfile im Anhang hinzufügen
   }
