@@ -6,22 +6,54 @@
         xmlns:local="clr-namespace:Forms"
         mc:Ignorable="d"
         Title="Backup erstellen" MinHeight="450" Height="450" MaxHeight="450" MinWidth="800" Width="800" MaxWidth="800">
-    <Grid>
-        <Label Content="Wählen Sie den Quellpfad aus" Margin="10,0,0,0" />
-        <TextBox Name="topSrc" Margin="180,5,10,390" /> <!-- left, top, right, bottom  -->
-        <Button Name="choiceSrc" Content="Pfad auswählen" Margin="10,30,10,350" />
+    <Window.Resources>
+        <Style x:Key="ChoosePath" TargetType="Button">
+            <Setter Property="Background" Value="LightGray" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="BorderBrush" Value="Azure" />
+            <Setter Property="Height" Value="50" />
+        </Style>
+        <Style x:Key="StartBackup" TargetType="Button">
+            <Setter Property="Background" Value="#bdbfc0" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+        <Style x:Key="Text" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="FontFamily" Value="TimesNewRoman" />
+        </Style>
+        <Style x:Key="optional" TargetType="Label">
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+    </Window.Resources>
 
-        <Label Content="Wählen Sie den Zielpfad aus" Margin="10,75,0,0" />
-        <TextBox Name="topBck" Margin="180,80,10,315" />
-        <Button Name="choiceBck" Content="Pfad auswählen" Margin="10,105,10,275" />
+    <Grid x:Name="LayoutRoot" Background="AliceBlue">
+        <Label Content="Wählen Sie den Quellpfad aus" Margin="10,0,0,0" Style="{StaticResource Text}" />
+        <TextBox Name="topSrc" Margin="320,5,10,390" />
+        <!-- left, top, right, bottom  -->
+        <Button Name="choiceSrc" Content="Pfad auswählen" Margin="10,10,10,315" Style="{StaticResource ChoosePath}" />
 
-        <Label Content="Wählen Sie den Protokollpfad aus" Margin="10,150,0,0" />
-        <TextBox Name="topLog" Margin="200,155,10,240" />
-        <Button Name="choiceLog" Margin="10,180,10,200" Content="Pfad auswählen" />
+        <Label Content="Wählen Sie den Zielpfad aus" Margin="10,85,0,0" Style="{StaticResource Text}" />
+        <TextBox Name="topBck" Margin="320,90,10,305" />
+        <Button Name="choiceBck" Content="Pfad auswählen" Margin="10,115,10,245" Style="{StaticResource ChoosePath}" />
+        <Image Width="40" Margin="700,0,10,305" Source="C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\source.png" />
 
-        <Label Content="Geben Sie Ihre E-Mail Adresse an" Margin="10,230,0,0" />
-        <TextBox Name="userMail" Margin="200,235,10,160" />
+        <Label Content="Wählen Sie den Protokollpfad aus" Margin="10,170,0,0" Style="{StaticResource Text}" />
+        <TextBox Name="topLog" Margin="320,175,10,220" />
+        <Button Name="choiceLog" Margin="10,200,10,160" Content="Pfad auswählen" Style="{StaticResource ChoosePath}" />
+        <Image Width="40" Margin="700,0,10,130" Source="C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\safe.png" />
 
-        <Button Name="choiceSave" Margin="75,340,75,30" Content="Backup starten" />
+        <Label Content="Geben Sie Ihre E-Mail Adresse an" Margin="10,255,0,0" Style="{StaticResource Text}" />
+        <Label Content="(optional)" Margin="250,256,0,0" Style="{StaticResource optional}" />
+        <TextBox Name="userMail" Margin="320,260,10,133" />
+        <Image Width="40" Margin="700,40,10,0" Source="C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\protokoll.png" />
+
+        <Button Name="choiceSave" Margin="75,340,75,30" Content="Backup starten" Style="{StaticResource StartBackup}" />
+        <Image Width="40" Margin="200,310,0,0" Source="C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\backup.png" />
     </Grid>
 </Window>

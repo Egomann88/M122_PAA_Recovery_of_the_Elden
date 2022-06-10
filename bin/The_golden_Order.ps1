@@ -66,7 +66,7 @@ function CreateBackup {
   }
   Write-Host "Bitte warten Sie einen Moment, Prozesse laufen noch......." -ForegroundColor Yellow
   $result = controllBackup $PathSrc $PathBck # Ruft funktion zur Überprüfung auf und speichert Rückgabewert
-  if ($userMail -ne ""){
+  if ($userMail -ne "") {
     Write-Mail $userMail $result[0] $result[1] # Email mit Fehlschlag versenden
   }
   Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black # Gibt Resultat in Grün oder Rot an
@@ -211,9 +211,9 @@ function OpenGui() {
 # Schreibt eine E-Mail, ob das Backup erfolgreich war oder nicht (mit Logfile)
 function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichkeit) {
   [string]$log = Get-ChildItem "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt" # aktuelle Logfile
-  [int]$totFilesSrc = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+  [int]$totFlsSrc = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
   # Zähler, wie viele Elemente kopiert wurden
-  [int]$totFilesBck = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
+  [int]$totFlsBck = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
 
 
   if ($farbeDringlichkeit -eq "Green") {
@@ -229,7 +229,7 @@ function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichke
   $Mail.To = "$userMail" # E-Mail des Empfängers
   $Mail.Subject = "$title" # Titel
   # Nachricht
-  $Mail.Body = "Es wurden $totFilesSrc Elemente von $totFilesBck kopiert.`nGenauere Informationen befinden sich im Anhang."
+  $Mail.Body = "Es wurden $totFlsSrc Elemente von $totFlsBck kopiert.`nGenauere Informationen befinden sich im Anhang."
   $Mail.importance = $importance # Dringlichkeit der Mail
   try {
     $Mail.Attachments.Add($log) # Logfile im Anhang hinzufügen

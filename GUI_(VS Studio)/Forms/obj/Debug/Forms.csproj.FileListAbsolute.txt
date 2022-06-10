@@ -28,3 +28,4 @@ C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\obj\Debug\Forms.csproj.G
 C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\obj\Debug\Forms.csproj.CoreCompileInputs.cache
 C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\obj\Debug\Forms.exe
 C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\obj\Debug\Forms.pdb
+C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\obj\Debug\App.baml
