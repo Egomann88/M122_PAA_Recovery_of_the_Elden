@@ -2,7 +2,7 @@
 Projekt; Recovery of the elden
 Letzte Änderung: 02.06.2022 11:34
 Erstellt von: Dominic Tosku & Justin Urbanek
-Version: 0.5
+Version: 1.0
 Versionsumschreibung: In der Testphase
 #>
 
@@ -33,7 +33,7 @@ function CreateBackup {
     [string]$PathSrc = $TopSrc, # Pfad aus dem ein Backup erstellt werden soll / Default TopSrc
     [string]$PathBck = $TopBck # Pfad in welchem das Backup erstellt werden soll / Default TopBck
   )
-  [string]$BackupFilesSrc = $PathSrc + "\*" # Objekt(e), das / die kopiert werden soll
+  [string]$BackupFilesSrc = $PathSrc # Objekt(e), das / die kopiert werden soll
   # Holt alle Elemnte im Src Verzeichnis
   Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
     [string]$targetFile = $PathBck + $_.FullName.SubString($PathSrc.Length); # Sorgt dafür das im Pfad die Überodner sind
