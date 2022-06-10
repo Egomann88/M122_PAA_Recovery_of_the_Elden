@@ -35,6 +35,7 @@ function CreateBackup {
   )
   [string]$BackupFilesSrc = $PathSrc # Objekt(e), das / die kopiert werden soll
   # Holt alle Elemnte im Src Verzeichnis
+  New-Item -Path ($PathBck) -ItemType "directory" -Force | Out-Null
   Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
     [string]$targetFile = $PathBck + $_.FullName.SubString($PathSrc.Length); # Sorgt dafür das im Pfad die Überodner sind
     # Überprüft, ob das akutelle Element ein Ordner ist
