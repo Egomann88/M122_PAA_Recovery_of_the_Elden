@@ -154,7 +154,7 @@ function lastChangeDate() {
 # Funtkioniert momentan nicht in einer Funktion, auspacken zum testen
 function OpenGui() {
   Add-Type -AssemblyName PresentationFramework
-  $xamlFile = "C:\M122_PAA_Recovery_of_the_Elden\GUI_(VS Studio)\Forms\MainWindow.xaml"
+  $xamlFile = ".\GUI_(VS Studio)\Forms\MainWindow.xaml"
   #create window
   $inputXML = Get-Content $xamlFile -Raw
   $inputXML = $inputXML -replace 'mc:Ignorable="d"', '' -replace "x:N", 'N' -replace '^<Win.*', '<Window'
@@ -211,7 +211,7 @@ function OpenGui() {
 }
 # Schreibt eine E-Mail, ob das Backup erfolgreich war oder nicht (mit Logfile)
 function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichkeit) {
-  [string]$log = Get-ChildItem "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt" # aktuelle Logfile
+  [string]$log = Get-ChildItem ".\log\Log_$date.txt" # aktuelle Logfile
   [int]$totFlsSrc = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
   # Zähler, wie viele Elemente kopiert wurden
   [int]$totFlsBck = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
