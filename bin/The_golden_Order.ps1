@@ -35,7 +35,7 @@ function CreateBackup {
   )
   [string]$BackupFilesSrc = $PathSrc # Objekt(e), das / die kopiert werden soll
   # Holt alle Elemnte im Src Verzeichnis
-  New-Item -Path ($PathBck) -ItemType "directory" -Force | Out-Null
+  New-Item -Path ($PathBck) -ItemType "directory" -Force | Out-Null # Erstellt das Oberste Verzeichnis des Backup Ordners
   Get-ChildItem -Path $BackupFilesSrc -Recurse  | ForEach-Object {
     [string]$targetFile = $PathBck + $_.FullName.SubString($PathSrc.Length); # Sorgt dafür das im Pfad die Überodner sind
     # Überprüft, ob das akutelle Element ein Ordner ist
@@ -184,6 +184,7 @@ function OpenGui() {
   }
   Get-Variable var_*
 
+  # Code Blöcke, welche beim betätigen eines Klicks im GUI ausgelöst werden
   $var_choiceSrc.Add_Click( {
       $Global:TopSrc = (Get-Folder + "\")
       $var_topSrc.Text = ($TopSrc + "\")
@@ -203,8 +204,8 @@ function OpenGui() {
     })
 
   $var_choiceSave.Add_Click( {
-      $Global:userMail = $var_userMail.Text
-      CreateBackup
+      $Global:userMail = $var_userMail.Text 
+      CreateBackup # Ruft die Backup Funktion auf
     })
 
   $Null = $window.ShowDialog()
