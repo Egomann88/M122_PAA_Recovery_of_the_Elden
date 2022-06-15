@@ -15,7 +15,12 @@ $date = Get-Date -Format "dd.MM.yyyy HH-mm-ss" # Akutelles Datum speichern
 [string]$TopLog = "C:\M122_PAA_Recovery_of_the_Elden\log\Log_$date.txt"
 $Global:userMail = "" # Mail des Nutzers
 $Global:BckSucces = "" # Endnachricht für Email
-# [string]$BackupPath = $TopBck + "\*" # Wählt alle Dateien im Backup-Pfad aus
+
+
+# Pfad des Skripts wird dem Powershell skript Standort zugewiesen
+# Powershell hat ein Problem mit relativen Pfaden, in Visual Studio Code kann dies ignoriert werden
+Set-Location $PSScriptRoot
+
 
 # -------------------------------------------------------------
 # Wilkommensnachricht
@@ -154,7 +159,7 @@ function lastChangeDate() {
 # Funtkioniert momentan nicht in einer Funktion, auspacken zum testen
 function OpenGui() {
   Add-Type -AssemblyName PresentationFramework
-  $xamlFile = ".\GUI_(VS Studio)\Forms\MainWindow.xaml"
+  $xamlFile = "..\GUI_(VS Studio)\Forms\MainWindow.xaml"
   #create window
   $inputXML = Get-Content $xamlFile -Raw
   $inputXML = $inputXML -replace 'mc:Ignorable="d"', '' -replace "x:N", 'N' -replace '^<Win.*', '<Window'
