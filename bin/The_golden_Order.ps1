@@ -77,13 +77,13 @@ function CreateBackup {
   }
   Write-Host "Bitte warten Sie einen Moment, Prozesse laufen noch......." -ForegroundColor Yellow
   $result = controllBackup $PathSrc $PathBck # Ruft funktion zur Überprüfung auf und speichert Rückgabewert
-  if ($userMail -ne "") {
-    Write-Mail $userMail $result[0] $result[1] # Email mit Fehlschlag versenden
-  }
   Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black # Gibt Resultat in Grün oder Rot an
   Write-Output "------------------------" | Out-file $TopLog -Append
   Write-Output $result[0] | Out-file $TopLog -Append
   CreateLog 2 # Beendet die Log File
+  if ($userMail -ne "") {
+    Write-Mail $userMail $result[0] $result[1] # am Schluss E-Mail versenden
+  }
 }
 
 # Zählt alle kopierten Objekte und ruft Funktion zum kontrollieren auf
@@ -238,7 +238,7 @@ function OpenGui() {
 }
 # Schreibt eine E-Mail, ob das Backup erfolgreich war oder nicht (mit Logfile)
 function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichkeit) {
-  [string]$log = Get-ChildItem ".\log\Log_$date.txt" # aktuelle Logfile
+  [string]$log = $TopLog # aktuelle Logfile
   [int]$totFlsSrc = (Get-ChildItem $TopSrc -Recurse | Where-Object { !($_.PSIsContainer) }).Count
   # Zähler, wie viele Elemente kopiert wurden
   [int]$totFlsBck = (Get-ChildItem $TopBck -Recurse | Where-Object { !($_.PSIsContainer) }).Count
