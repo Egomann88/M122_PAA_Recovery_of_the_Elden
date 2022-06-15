@@ -38,6 +38,7 @@ function CreateBackup {
     [string]$PathSrc = $TopSrc, # Pfad aus dem ein Backup erstellt werden soll / Default TopSrc
     [string]$PathBck = $TopBck # Pfad in welchem das Backup erstellt werden soll / Default TopBck
   )
+  CreateLog 1
   [string]$BackupFilesSrc = $PathSrc # Objekt(e), das / die kopiert werden soll
   # Holt alle Elemnte im Src Verzeichnis
   New-Item -Path ($PathBck) -ItemType "directory" -Force | Out-Null # Erstellt das Oberste Verzeichnis des Backup Ordners
@@ -49,11 +50,13 @@ function CreateBackup {
         # Versucht einen neuen Ordner zu erstellen
         New-Item -Path ($targetFile) -ItemType "directory" -Force | Out-Null
         Write-Host -ForegroundColor Green "Verzeichnis erfolgreich erstellt '$targetFile'."
+        Write-Output "Verzeichnis erfolgreich erstellt '$targetFile'." | Out-file $TopLog -Append
       }
       catch {
         # Der Ordner konnte nicht erstellt werden, evtl fehlen Schreibrechte.
         # Ein Fehler wird ausgegeben
         Write-Error -Message "Ein Fehler beim erstellen von '$targetFile'. Fehler war: $_"
+        Write-Output "Ein Fehler beim erstellen von '$targetFile'. Fehler war: $_" | Out-file $TopLog -Append
         Exit
       }
     }
@@ -62,11 +65,13 @@ function CreateBackup {
       try {
         Copy-Item  -Path ($_.Fullname) -Destination ($targetFile) -Force -Container | Out-Null  # kopiert Element, ins Bck Verzeichnis
         Write-Host -ForegroundColor Green "Datei erfolgreich erstellt '$targetFile'."
+        Write-Output "Datei erfolgreich erstellt '$targetFile'." | Out-file $TopLog -Append
       }
       catch {
         # Die Datei konnte nicht erstellt werden, evtl fehlen Schreibrechte.
         # Ein Fehler wird ausgegeben
         Write-Error -Message "Ein Fehler beim erstellen von '$targetFile'. Fehler war: $_"
+        Write-Output "Ein Fehler beim erstellen von '$targetFile'. Fehler war: $_" | Out-file $TopLog -Append
       }
     }
   }
@@ -76,6 +81,8 @@ function CreateBackup {
     Write-Mail $userMail $result[0] $result[1] # Email mit Fehlschlag versenden
   }
   Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black # Gibt Resultat in Grün oder Rot an
+  Write-Output $result[0] | Out-file $TopLog -Append
+  CreateLog 2
 }
 
 # Zählt alle kopierten Objekte und ruft Funktion zum kontrollieren auf
@@ -92,7 +99,7 @@ function controllBackup([string]$checkSrc, [string]$checkBck) {
   [boolean]$Korrekt = checkHash $checkSrc $checkBck # Ruft Funktion zum Hash check auf und speichert Ausgabe
   if ($Korrekt) {
     # Alle Elemente wurden kopiert
-    $BckSucces = "gelungen"; # Mail -> Das Backup ist gelungen
+    $Global:BckSucces = "gelungen"; # Mail -> Das Backup ist gelungen
     return ("Das Backup ist gelungen", "Green") # Gibt String mit Farbe zurück
   }
   else {
@@ -133,8 +140,20 @@ Function Get-Folder($initialDirectory) {
 
 # Erstellt eine Log File
 # Informationen über alle Kopierten Dateien
-function CreateLog {
-  # Add-Content <File> -Value <LogText> # (Log-)Datei etwas anf�gen
+function CreateLog([int]$Ablauf) {
+  switch ($Ablauf) {
+    1 {
+      Write-Output " ------------------ " | Out-File $TopLog -Append
+      Write-Output "Verlauf wurde gestartet am: $date" | Out-File $TopLog -Append
+      Write-Output " ------------------ " | Out-File $TopLog -Append
+      Write-Output "Quelverzeichnis ist: $TopSrc" | Out-File $TopLog -Append
+      Write-Output "Zielverzeichnis ist: $TopSrc" | Out-File $TopLog -Append
+    }
+    2 {
+      Write-Output "Skript beendet" | Out-File $TopLog -Append
+      Write-Output "                " | Out-File $TopLog -Append
+    }
+  }
 }
 
 # Shortcut für Clear-Host
@@ -204,7 +223,7 @@ function OpenGui() {
 
   $var_choiceLog.Add_Click( {
       $Global:TopLog = Get-Folder
-      $var_topLog.Text = ($TopLog + "\")
+      $var_topLog.Text = ($TopLog + "\Log_$date.txt")
       $Global:TopLog = $var_topLog.Text
     })
 
@@ -255,9 +274,7 @@ function Write-Mail([string]$userMail, [string]$title, [string]$farbeDringlichke
 # -------------------------------------------------------------
 
 # Logdatei erstellen
-Start-Transcript $TopLog
 OpenGui # CreateBackup Funktion aufrufen
-Stop-Transcript  #Log file abschliessen
 
 
 Write-Host "Das Programm endet hier" -BackgroundColor White -ForegroundColor Black
