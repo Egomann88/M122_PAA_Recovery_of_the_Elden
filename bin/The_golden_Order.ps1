@@ -38,7 +38,7 @@ function CreateBackup {
     [string]$PathSrc = $TopSrc, # Pfad aus dem ein Backup erstellt werden soll / Default TopSrc
     [string]$PathBck = $TopBck # Pfad in welchem das Backup erstellt werden soll / Default TopBck
   )
-  CreateLog 1
+  CreateLog 1 # Startet die Log File
   [string]$BackupFilesSrc = $PathSrc # Objekt(e), das / die kopiert werden soll
   # Holt alle Elemnte im Src Verzeichnis
   New-Item -Path ($PathBck) -ItemType "directory" -Force | Out-Null # Erstellt das Oberste Verzeichnis des Backup Ordners
@@ -81,8 +81,9 @@ function CreateBackup {
     Write-Mail $userMail $result[0] $result[1] # Email mit Fehlschlag versenden
   }
   Write-Host $result[0] -BackgroundColor $result[1] -ForegroundColor Black # Gibt Resultat in Grün oder Rot an
+  Write-Output "------------------------" | Out-file $TopLog -Append
   Write-Output $result[0] | Out-file $TopLog -Append
-  CreateLog 2
+  CreateLog 2 # Beendet die Log File
 }
 
 # Zählt alle kopierten Objekte und ruft Funktion zum kontrollieren auf
@@ -206,6 +207,7 @@ function OpenGui() {
       throw
     }
   }
+  # Hollt alle Variablen des GUI und speichert sie in Powershell Variablen
   Get-Variable var_*
 
   # Code Blöcke, welche beim betätigen eines Klicks im GUI ausgelöst werden
