@@ -3,19 +3,19 @@ PAA - Recovery of the Elden
 
 ***
 
-# How to Push:
+## How to Push:
 > [File] [Changes] [added / deleted / ...]
 
-# Bedeutung:
+## Bedeutung:
 - ❌ ist nicht verfüllt
 - ✅ ist erfüllt
 
-# Auftrag:
+## Auftrag:
 - Backup ✅
 - Log ✅
 - Test mit ausgabe ✅
 
-# Abgaben:
+## Abgaben:
 - Powershell ✅
 - PAP ✅
 - LOG ✅
@@ -23,23 +23,23 @@ PAA - Recovery of the Elden
 - Testfall ✅
 - Video ✅
 
-# Vorgaben: 
-  ## Powershell Datei:
+## Vorgaben: 
+  ### Powershell Datei:
   
-  ## Titel und Zweck, Projekt-Name 
+  ### Titel und Zweck, Projekt-Name 
   - Datum der Erstellung und / oder Modifikation ✅
   - Autor/en ✅
   - File-Name ✅
   - Versionsname und Versionsumschreibung ✅
   - Globale Variablen: à Dokumentieren sie einzelne Variablen ✅ 
   
-  ## Funktionen: Dokumentieren sie:
+  ### Funktionen: Dokumentieren sie:
   - Zweck der Funktion ✅
   - Verwendete Parameter ✅
   - Zweck und Typ der Parameter ✅
   - Evt. Rückgabewert ✅
   - Evt. Ausgaben ✅
 
-  ## Code-Blöcke (in Funktionen): Was geschieht im Block 
+  ### Code-Blöcke (in Funktionen): Was geschieht im Block 
   - Annahmen für die Implementation ✅
   - To do Liste ✅
