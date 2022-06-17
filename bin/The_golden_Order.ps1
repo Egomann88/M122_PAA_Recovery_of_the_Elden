@@ -1,9 +1,9 @@
 <#
 Projekt; Recovery of the elden
-Letzte Änderung: 02.06.2022 11:34
+Letzte Änderung: 16.06.2022 11:34
 Erstellt von: Dominic Tosku & Justin Urbanek
 Version: 1.0
-Versionsumschreibung: In der Testphase
+Versionsumschreibung: Funktionstüchtig und Release bereit
 #>
 
 # -------------------------------------------------------------
@@ -109,7 +109,6 @@ function controllBackup([string]$checkSrc, [string]$checkBck) {
     return ("Das Backup ist fehlgeschlagen", "Red") # Gibt String mit Farbe zurück
   }
 }
-# !highlight meines Lebens –Path
 # Kontrolliert den Hash des Source und Backup Ordners
 function checkHash ([string]$Hash1, [string]$Hash2) {
   # Weisst den Hash aller Files im Source Ordner einer Variablen zu
