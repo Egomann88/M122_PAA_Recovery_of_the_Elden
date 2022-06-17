@@ -13,15 +13,15 @@ PAA - Recovery of the Elden
 # Auftrag:
 - Backup ✅
 - Log ✅
-- Test mit ausgabe ❌
+- Test mit ausgabe ✅
 
 # Abgaben:
 - Powershell ✅
 - PAP ✅
 - LOG ✅
-- Testfall ❌
-- Testfall ❌
-- Video ❌
+- Testfall ✅
+- Testfall ✅
+- Video ✅
 
 # Vorgaben: 
   ## Powershell Datei:
@@ -40,6 +40,6 @@ PAA - Recovery of the Elden
   - Evt. Rückgabewert ✅
   - Evt. Ausgaben ✅
 
-  ## Code-Blöcke (in Funktionen): à Was geschieht im Block 
-  - Annahmen für die Implementation ❌
-  - To do Liste ❌
+  ## Code-Blöcke (in Funktionen): Was geschieht im Block 
+  - Annahmen für die Implementation ✅
+  - To do Liste ✅
